@@ -1,0 +1,28 @@
+<div id="JaegerStats">
+
+    <ul class="graphs"> 
+        <li *ngFor="let graph of graphs">
+            <button [class.selected]="graph === selectedGraph" type="button" (click)="onSelect(graph)">
+              <span class="nr">{{graph.id}}</span>
+              <span class="name">{{graph.name}}</span>
+            </button>
+          </li>    
+    </ul>
+
+    <div *ngIf="selectedGraph">
+        <h2>{{selectedGraph.name | uppercase}} Details</h2>
+        <div>id: {{selectedGraph.id}}</div>
+        <div>
+          <label for="graph-name">Call-Path: </label>
+          <input id="graph-name" [(ngModel)]="selectedGraph.name" placeholder="name">
+        </div>
+      </div>
+
+    <div id="divChart">
+        <canvas id="jaegerChart"></canvas>
+        <canvas id="jaegerChart-2"></canvas>
+        <canvas id="jaegerChart-3"></canvas>
+    </div>
+    
+</div>
+
