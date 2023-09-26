@@ -4,10 +4,10 @@ export interface Dataset {
         label: String,
         data: Number[],
         fill: Boolean,
-        tension: Number,
-        backgroundColor: String[],
-        borderColor: String[],
-        borderWidth: Number
+        // tension: Number,
+        // backgroundColor: String[],
+        // borderColor: String[],
+        // borderWidth: Number
 }
 
 export interface ChartData {
@@ -32,4 +32,10 @@ export interface ChartDescr {
     type: String,  // this field can not exist in Rust as type is a reserved word.
     data: ChartData,
     options: ChartOptions 
+}
+
+
+export interface ChartDataParameters {
+    labels: String[],
+    data: Number[][]
 }

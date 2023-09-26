@@ -1,5 +1,5 @@
+use log::info;
 use serde::Serialize;
-use log::{info, debug};
 
 #[derive(Serialize)]
 pub struct Dataset {
@@ -23,18 +23,18 @@ pub struct ChartData {
 
 #[derive(Serialize)]
 pub struct ChartScale {
-    pub beginAtZero: bool
+    pub beginAtZero: bool,
 }
 
 #[derive(Serialize)]
 pub struct ChartScales {
     pub x: ChartScale,
-    pub y: ChartScale
+    pub y: ChartScale,
 }
 
 #[derive(Serialize)]
 pub struct ChartOptions {
-    scales: ChartScales
+    scales: ChartScales,
 }
 
 #[derive(Serialize)]
@@ -42,40 +42,100 @@ pub struct ChartDescr {
     #[serde(rename = "type")]
     pub type_rs: String,
     pub data: ChartData,
-    pub options: Option<ChartOptions> 
+    pub options: Option<ChartOptions>,
 }
 
 #[tauri::command]
 pub fn get_chart_descr(name: &str, metric: &str) -> ChartDescr {
     info!("RUST: Received call to get_chart_descr({name}, {metric})");
 
-
     info!("Received in get_chart_descr:  name={name} and metric={metric}");
 
-    ChartDescr { 
-        type_rs: "line".to_string(), 
-        data: ChartData { 
-            labels: vec!["jan".to_string(), "febr".to_string(), "MaaRT".to_string(), "April".to_string(), "mEi".to_string(), "Juni".to_string(), "JulY".to_string()], 
+    ChartDescr {
+        type_rs: "line".to_string(),
+        data: ChartData {
+            labels: vec![
+                "jan".to_string(),
+                "febr".to_string(),
+                "MaaRT".to_string(),
+                "April".to_string(),
+                "mEi".to_string(),
+                "Juni".to_string(),
+                "JulY".to_string(),
+            ],
             datasets: vec![
-                Dataset{
+                Dataset {
                     label: "My First Dataset".to_string(),
                     data: vec![65.0, 59.0, 80.0, 81.0, 56.0, 55.0, 40.0],
                     fill: false,
                     border_color: "rgb(75, 192, 192)".to_string(),
                     tension: Some(0.1),
                     background_color: None,
-                    border_width: None
-                  },
-                  Dataset{
+                    border_width: None,
+                },
+                Dataset {
                     label: "2nd Dataset".to_string(),
                     data: vec![100.0, 90.0, 80.0, 75.0, 70.0, 75.0, 40.0],
                     fill: false,
                     border_color: "rgb(255, 0, 0)".to_string(),
                     tension: Some(0.1),
                     background_color: None,
-                    border_width: None
-                  },
-            ] }, 
-        options: None, 
+                    border_width: None,
+                },
+            ],
+        },
+        options: None,
     }
 }
+
+#[derive(Serialize, Debug)]
+pub struct ChartDataParameters {
+    pub labels: Vec<String>,
+    pub data: Vec<Vec<f64>>,
+}
+
+#[tauri::command]
+pub fn get_chart_data(name: &str, metric: &str) -> ChartDataParameters {
+    let metric = "DUMMY";
+    info!("$$$$   RUST: Received call to get_chart_data({name}, {metric})");
+
+    let cdp = ChartDataParameters {
+        labels: vec![
+            "jan".to_string(),
+            "febr".to_string(),
+            "MaaRT".to_string(),
+            "April".to_string(),
+            "mEi".to_string(),
+            "Juni".to_string(),
+            "JulY".to_string(),
+        ],
+        data: vec![
+            vec![65.0, 59.0, 80.0, 81.0, 56.0, 55.0, 40.0],
+            vec![100.0, 20.0, 80.0, 75.0, 70.0, 75.0, 40.0],
+        ],
+    };
+
+    cdp
+}
+
+// #[derive(Serialize, Debug)]
+// pub struct ChartDataParameters {
+//     pub labels: Vec<String>,
+//     pub data: Vec<Vec<f64>>,
+// }
+
+// #[tauri::command]
+// pub fn get_chart_data(name: &str) -> String {
+//     let metric = "DUMMY";
+//     info!("$$$$   RUST: Received call to get_chart_data({name}, {metric})");
+
+//     let cdp = ChartDataParameters{
+//         labels: vec!["jan".to_string(), "febr".to_string(), "MaaRT".to_string(), "April".to_string(), "mEi".to_string(), "Juni".to_string(), "JulY".to_string()],
+//         data: vec![
+//             vec![65.0, 59.0, 80.0, 81.0, 56.0, 55.0, 40.0],
+//             vec![100.0, 90.0, 80.0, 75.0, 70.0, 75.0, 40.0]
+//         ]
+//     };
+
+//     format!("{cdp:?}")
+// }
