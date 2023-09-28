@@ -1,0 +1,40 @@
+<div class="card gap-2 my-4">
+    <p class="mb-1">Ranking</p>
+    <p-selectButton [(ngModel)]="selectedRanking" [options]="rankingOptions" optionLabel="label"
+        (onChange)="changeRanking($event.value)"></p-selectButton>
+</div>
+
+<p-toolbar styleClass="align-items-end">
+    <div class="p-toolbar-group-start">
+        <div class="card ">
+            <p-autoComplete [(ngModel)]="selectedProcess" [suggestions]="filteredProcesses" field="name"
+                placeholder="Search process..." [dropdown]="true" (onSelect)="changeProcess($event)"
+                (completeMethod)="filterProcess($event)">
+                <ng-template let-process pTemplate="item">
+                    <span class="block">{{ process.name }}</span>
+                    <small [ngClass]="{
+                        'text-orange-500': process.rank >= 0.5,
+                        'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
+                        'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
+                        'text-indigo-500': process.rank < 0.1,
+                    }">{{ process.rank }}</small>
+                </ng-template>
+            </p-autoComplete>
+        </div>
+    </div>
+
+    <div class="p-toolbar-group-end ">
+        <p-autoComplete [suggestions]="filteredProcesses" field="name" placeholder="Search related processes..."
+            [dropdown]="true" (completeMethod)="filterProcess($event)">
+            <ng-template let-process pTemplate="item">
+                <span class="block">{{ process.name }}</span>
+                <small [ngClass]="{
+                    'text-orange-500': process.rank >= 0.5,
+                    'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
+                    'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
+                    'text-indigo-500': process.rank < 0.1,
+                }">{{ process.rank }}</small>
+            </ng-template>
+        </p-autoComplete>
+    </div>
+</p-toolbar>

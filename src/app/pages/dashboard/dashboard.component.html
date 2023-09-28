@@ -1,20 +1,31 @@
-<app-page-header pageName="Dashboard" [breadcrumb]="breadcrumb">
+<app-page-header [pageName]="pageName" [breadcrumb]="breadcrumb">
     <app-dashboard-header-metrics
-            metrics
-            [users]="3322"
-            [sessions]="4591"
-            [duration]="2.32"
+        metrics
+        [users]="3322"
+        [sessions]="4591"
+        [duration]="2.32"
     ></app-dashboard-header-metrics>
 </app-page-header>
 
-<p-toolbar>
-    <div class="p-toolbar-group-start">
-        {{graphs | json}}
-        <div class="card flex justify-content-center">
-            <p-autoComplete 
-                [(ngModel)]="selectedItem" 
-                [suggestions]="suggestions"
-                (completeMethod)="search($event)"></p-autoComplete>
-        </div>
+<app-dashboard-filterbar
+    [processes]="processes"
+></app-dashboard-filterbar>
+
+<!-- Selected process -->
+<ng-container *ngIf="_dashboard.selectedProcess$ | async as process">
+    <small class="block mt-2 text-500">Selected: {{ process.name }}</small>
+</ng-container>
+
+<div class="grid mt-4 gap-5">
+    <div class="col">
+        <ng-container *ngIf="!chartsError; else chartErrorMessage">
+            <app-process-charts></app-process-charts>
+        </ng-container>
+        <ng-template #chartErrorMessage>
+            <p>{{ chartsError }}</p>
+        </ng-template>
     </div>
-</p-toolbar>
+    <div class="col">
+        <app-related-processes></app-related-processes>
+    </div>
+</div>

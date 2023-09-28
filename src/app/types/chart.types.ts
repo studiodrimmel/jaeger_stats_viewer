@@ -1,4 +1,11 @@
+export type ChartLine = {
+    label: string;
+    data: number[];
+}
+
 export interface ChartData {
-    labels: String[],
-    data: Number[][]
+    title: string;
+    description: string[][];
+    labels: String[];
+    lines: ChartLine[]
 }

@@ -1,0 +1,13 @@
+<section>
+    <header class="mb-2">
+        <h2>Process metrics</h2>
+    </header>
+
+    <div *ngFor="let chart of charts$ | async">
+        <div class="card border-round border-1 border-solid border-400 p-4 mb-3">
+            <small class="block mb-2 text-600">{{chart.title}}</small>
+            <p-chart type="line" [data]="chart.data"></p-chart>
+        </div>
+    </div>
+
+</section>
