@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables, ChartConfiguration, ChartTypeRegistry } from 'chart.js';
-import { Graph, GRAPHS} from "../graph";
-import { ChartDataParameters } from '../chart_descr';
+import { Graph, GRAPHS} from "../../graph";
+import { ChartDataParameters } from '../../chart_descr';
 // logging
 import { info, error } from "tauri-plugin-log-api";  
 
