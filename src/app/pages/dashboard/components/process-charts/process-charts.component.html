@@ -1,0 +1,57 @@
+<section>
+    <header >
+        <h2 class="font-medium mb-2">Process metrics</h2>
+    </header>
+
+    <p-autoComplete 
+        [(ngModel)]="selectedProcess" 
+        [autoHighlight]="true" 
+        [dropdown]="true" 
+        field="name"
+        [forceSelection]="true"
+        placeholder="Search process..." 
+        styleClass="mb-2" 
+        [style]="{
+            width: '100%'
+        }" 
+        [suggestions]="filteredProcesses" 
+        (onSelect)="changeProcess($event)"
+        (completeMethod)="filterProcess($event)"
+    >
+        <ng-template let-process pTemplate="item">
+            <span class="block">{{ process.name }}</span>
+            <small [ngClass]="{
+            'text-orange-500': process.rank >= 0.5,
+            'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
+            'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
+            'text-indigo-500': process.rank < 0.1,
+        }">{{ process.rank }}</small>
+        </ng-template>
+    </p-autoComplete>
+
+    <!-- Selected process -->
+    <ng-container *ngIf="_dashboard.selectedProcess$ | async as process">
+        <small class="block mb-4 text-500">Selected: {{ process.name }}</small>
+    </ng-container>
+
+    <p-panel *ngFor="let chart of charts$ | async" [header]="getChartPanelHeader(chart.metric)" [toggleable]="true"
+        toggler="header" styleClass="mb-3">
+        <p-chart type="line" [data]="chart.data"></p-chart>
+
+        <div
+            *ngIf="chart.description?.length"
+            class="border-round border-1 border-solid border-gray-300 pt-2 px-3 mt-3">
+            <h5 class="font-medium m-0 mb-2 pb-2 border-none border-bottom-1 border-solid border-gray-300">Description</h5>
+            <div class="grid">
+                <div 
+                    *ngFor="let item of chart.description"
+                    class="col"
+                >
+                {{item[1]}}
+                <small class="block text-xs">{{item[0]}}</small>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+
+</section>

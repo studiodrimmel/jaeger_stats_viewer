@@ -1,0 +1,1237 @@
+[
+  {
+    "idx": 119,
+    "name": "bspr-betaal-en-spaarrekeningbeheer-eb/Query",
+    "rank": 0.6771250562684631
+  },
+  {
+    "idx": 197,
+    "name": "retail-gateway//services/apic-productinzicht/api",
+    "rank": 0.6596635447316771
+  },
+  {
+    "idx": 101,
+    "name": "bspc-rekeninginzicht/POST",
+    "rank": 0.5859754519336596
+  },
+  {
+    "idx": 121,
+    "name": "bspr-betaal-en-spaarrekeningbeheer-eb/getAccounts",
+    "rank": 0.5177039154225962
+  },
+  {
+    "idx": 22,
+    "name": "bspc-betaal-en-spaarrekeningbeheer/getAccounts",
+    "rank": 0.517174411488549
+  },
+  {
+    "idx": 19,
+    "name": "bspc-betaal-en-spaarrekeningbeheer/GET",
+    "rank": 0.5099687283571388
+  },
+  {
+    "idx": 112,
+    "name": "bspc-spaarpotbeheer/getKlantinstelling",
+    "rank": 0.473013343611068
+  },
+  {
+    "idx": 204,
+    "name": "retail-gateway//services/apix-mijn-rekening/api",
+    "rank": 0.4710518981622403
+  },
+  {
+    "idx": 213,
+    "name": "retail-gateway/GET:/services/apic-productinzicht/api/producten",
+    "rank": 0.4587626559678695
+  },
+  {
+    "idx": 95,
+    "name": "bspc-productinzicht/geefContractDetails",
+    "rank": 0.34945787133437933
+  },
+  {
+    "idx": 233,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/{ACCOUNT}/transacties",
+    "rank": 0.34749222033602084
+  },
+  {
+    "idx": 3,
+    "name": "bsp-core-auth/createOAuthToken",
+    "rank": 0.3235615712953997
+  },
+  {
+    "idx": 211,
+    "name": "retail-gateway/GET:/services/apic-productinzicht/api/contract-details",
+    "rank": 0.32094255000949506
+  },
+  {
+    "idx": 144,
+    "name": "bspx-mijn-rekening/GET",
+    "rank": 0.2924023920778484
+  },
+  {
+    "idx": 27,
+    "name": "bspc-betaalpasbeheer/zoekBetaalPassen",
+    "rank": 0.27184301390505516
+  },
+  {
+    "idx": 25,
+    "name": "bspc-betaalopdrachtbeheer/getBetaalopdrachten",
+    "rank": 0.18729490652509695
+  },
+  {
+    "idx": 50,
+    "name": "bspc-ideal/geefIdeal2TransactieStatus",
+    "rank": 0.17633656651781357
+  },
+  {
+    "idx": 206,
+    "name": "retail-gateway/GET:/services/apic-ideal/api/ideal2-transacties/status",
+    "rank": 0.17603593571583603
+  },
+  {
+    "idx": 24,
+    "name": "bspc-betaalopdrachtbeheer/Query",
+    "rank": 0.16814801388540535
+  },
+  {
+    "idx": 104,
+    "name": "bspc-rekeninginzicht/getRekening",
+    "rank": 0.15415412968858033
+  },
+  {
+    "idx": 43,
+    "name": "bspc-hypotheekinzicht/POST",
+    "rank": 0.13111344148255114
+  },
+  {
+    "idx": 151,
+    "name": "bspx-mijn-rekening/getTotaalAantalGeweigerdeTransacties",
+    "rank": 0.10895700408688228
+  },
+  {
+    "idx": 225,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/aantal-geweigerde-transacties",
+    "rank": 0.10891990121591275
+  },
+  {
+    "idx": 107,
+    "name": "bspc-rekeninginzicht/getTransactions",
+    "rank": 0.10635244307657224
+  },
+  {
+    "idx": 45,
+    "name": "bspc-hypotheekinzicht/zoekZekerheidSamenvattingen",
+    "rank": 0.10275784006786796
+  },
+  {
+    "idx": 193,
+    "name": "retail-gateway//services/apic-ideal/api",
+    "rank": 0.08294778109889236
+  },
+  {
+    "idx": 11,
+    "name": "bspc-beleggingsportefeuillebeheer/geefBeleggingsportefeuille",
+    "rank": 0.07947187967449246
+  },
+  {
+    "idx": 12,
+    "name": "bspc-beleggingsportefeuillebeheer/getAvailableCashForTrading",
+    "rank": 0.07918087266837755
+  },
+  {
+    "idx": 14,
+    "name": "bspc-beleggingsportefeuillebeheer/getPortfolioOverview",
+    "rank": 0.07917964346722793
+  },
+  {
+    "idx": 13,
+    "name": "bspc-beleggingsportefeuillebeheer/getPortfolio",
+    "rank": 0.07917883132875188
+  },
+  {
+    "idx": 23,
+    "name": "bspc-betaalopdrachtbeheer/GET",
+    "rank": 0.07241110223857297
+  },
+  {
+    "idx": 155,
+    "name": "bspx-mobiel-accounts/GET",
+    "rank": 0.062104775845837644
+  },
+  {
+    "idx": 160,
+    "name": "lsm/Update",
+    "rank": 0.05624573169018183
+  },
+  {
+    "idx": 157,
+    "name": "bspx-mobiel-accounts/getTransactions",
+    "rank": 0.0545739024341723
+  },
+  {
+    "idx": 74,
+    "name": "bspc-klantinzicht/POST",
+    "rank": 0.05453074557757867
+  },
+  {
+    "idx": 239,
+    "name": "retail-gateway/GET:/services/apix-mobiel-accounts/api/transactions",
+    "rank": 0.05443956030214681
+  },
+  {
+    "idx": 176,
+    "name": "lsm/nl.devolksbank.lsm.events.riskshield.RiskShieldAssessmentClient.requestRiskShieldAssessment",
+    "rank": 0.04788821656072832
+  },
+  {
+    "idx": 179,
+    "name": "lsm/replicateAuthenticationTaskEvent",
+    "rank": 0.04778338273268133
+  },
+  {
+    "idx": 51,
+    "name": "bspc-ideal/geefIdealData",
+    "rank": 0.0474171066127189
+  },
+  {
+    "idx": 177,
+    "name": "lsm/postOneAuthenticationTask",
+    "rank": 0.04738027805821716
+  },
+  {
+    "idx": 94,
+    "name": "bspc-productinzicht/geefAantalOpenstaandeOpdrachten",
+    "rank": 0.04695806260635197
+  },
+  {
+    "idx": 212,
+    "name": "retail-gateway/GET:/services/apic-productinzicht/api/openstaande-opdrachten",
+    "rank": 0.046657889734756416
+  },
+  {
+    "idx": 118,
+    "name": "bspr-authenticatie-replicatie/postAuthenticationTaskEvents",
+    "rank": 0.04588904076494166
+  },
+  {
+    "idx": 117,
+    "name": "bspr-authenticatie-replicatie/PutItemRequest",
+    "rank": 0.04586810491294196
+  },
+  {
+    "idx": 158,
+    "name": "lsm/POST",
+    "rank": 0.04543967164826224
+  },
+  {
+    "idx": 126,
+    "name": "bspr-ideal/getTransaction",
+    "rank": 0.039012024799831596
+  },
+  {
+    "idx": 205,
+    "name": "retail-gateway//services/apix-mobiel-accounts/api",
+    "rank": 0.03804785563816556
+  },
+  {
+    "idx": 207,
+    "name": "retail-gateway/GET:/services/apic-ideal/api/idealdata",
+    "rank": 0.03535542515035653
+  },
+  {
+    "idx": 81,
+    "name": "bspc-ordermanagement-betalen/POST",
+    "rank": 0.029807377349720044
+  },
+  {
+    "idx": 84,
+    "name": "bspc-ordermanagement-betalen/getPaymentOrder",
+    "rank": 0.02366442171583425
+  },
+  {
+    "idx": 49,
+    "name": "bspc-ideal/POST",
+    "rank": 0.023095159676875757
+  },
+  {
+    "idx": 85,
+    "name": "bspc-ordermanagement-betalen/handleBackofficeEvent",
+    "rank": 0.021909955354817465
+  },
+  {
+    "idx": 83,
+    "name": "bspc-ordermanagement-betalen/Update",
+    "rank": 0.02156118495075094
+  },
+  {
+    "idx": 127,
+    "name": "bspr-ideal/publishTransactionRequest",
+    "rank": 0.019725763165612028
+  },
+  {
+    "idx": 124,
+    "name": "bspr-ideal/POST",
+    "rank": 0.01971048126312578
+  },
+  {
+    "idx": 80,
+    "name": "bspc-ordermanagement-betalen/GET",
+    "rank": 0.019245869057920993
+  },
+  {
+    "idx": 128,
+    "name": "bspr-ideal/publishTransactionResponse",
+    "rank": 0.018786917021680744
+  },
+  {
+    "idx": 82,
+    "name": "bspc-ordermanagement-betalen/Query",
+    "rank": 0.016681251366793
+  },
+  {
+    "idx": 48,
+    "name": "bspc-ideal/PATCH",
+    "rank": 0.016528448607519817
+  },
+  {
+    "idx": 86,
+    "name": "bspc-ordermanagement-betalen/postSepaPaymentOrder",
+    "rank": 0.016111107014987143
+  },
+  {
+    "idx": 16,
+    "name": "bspc-bestedingbeheer/Update",
+    "rank": 0.014319693272278299
+  },
+  {
+    "idx": 102,
+    "name": "bspc-rekeninginzicht/Query",
+    "rank": 0.013012669761032162
+  },
+  {
+    "idx": 47,
+    "name": "bspc-ideal/GET",
+    "rank": 0.012264452301506669
+  },
+  {
+    "idx": 125,
+    "name": "bspr-ideal/finalizeTransaction",
+    "rank": 0.01169745809410333
+  },
+  {
+    "idx": 154,
+    "name": "bspx-mijn-rekening/getTransacties",
+    "rank": 0.011590852110352871
+  },
+  {
+    "idx": 240,
+    "name": "retail-gateway/PATCH:/services/apic-ideal/api/ideal2-transacties",
+    "rank": 0.008993162891326394
+  },
+  {
+    "idx": 44,
+    "name": "bspc-hypotheekinzicht/zoekHypotheekdetailsPerZekerheid",
+    "rank": 0.008401171896821118
+  },
+  {
+    "idx": 214,
+    "name": "retail-gateway/GET:/services/apic-productinzicht/api/productgroepen",
+    "rank": 0.007754599692083441
+  },
+  {
+    "idx": 15,
+    "name": "bspc-bestedingbeheer/Query",
+    "rank": 0.00639554256218476
+  },
+  {
+    "idx": 17,
+    "name": "bspc-bestedingbeheer/createBesteding",
+    "rank": 0.004418659907724171
+  },
+  {
+    "idx": 59,
+    "name": "bspc-incassobeheer/Query",
+    "rank": 0.00042555169830860504
+  },
+  {
+    "idx": 164,
+    "name": "lsm/getOneAuthenticationTask",
+    "rank": -0.004772751680599612
+  },
+  {
+    "idx": 186,
+    "name": "mbp/GET",
+    "rank": -0.009954885307012863
+  },
+  {
+    "idx": 36,
+    "name": "bspc-digitaal-adres/zoekEmailadressen",
+    "rank": -0.015589462488318792
+  },
+  {
+    "idx": 182,
+    "name": "mbp/BSP: DigitaaladresUserApiClient: Querying email addresses",
+    "rank": -0.015609261505591292
+  },
+  {
+    "idx": 31,
+    "name": "bspc-digitaal-adres/Query",
+    "rank": -0.016805926883306923
+  },
+  {
+    "idx": 54,
+    "name": "bspc-ideal/patchIdealTransactie",
+    "rank": -0.017289147873678124
+  },
+  {
+    "idx": 75,
+    "name": "bspc-klantinzicht/Query",
+    "rank": -0.01791571980707611
+  },
+  {
+    "idx": 77,
+    "name": "bspc-klantinzicht/zoekProductcategorieen",
+    "rank": -0.017916090959884758
+  },
+  {
+    "idx": 156,
+    "name": "bspx-mobiel-accounts/getCards",
+    "rank": -0.026028902682195838
+  },
+  {
+    "idx": 226,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen",
+    "rank": -0.026903886435322464
+  },
+  {
+    "idx": 148,
+    "name": "bspx-mijn-rekening/getRekeningen",
+    "rank": -0.02690886290076956
+  },
+  {
+    "idx": 184,
+    "name": "mbp/BSP: Ideal2Client: Retrieving iDEAL2 transaction",
+    "rank": -0.027527539058000452
+  },
+  {
+    "idx": 241,
+    "name": "retail-gateway/POST:/mbp-application/pm/r",
+    "rank": -0.027550571396554896
+  },
+  {
+    "idx": 189,
+    "name": "mbp/Payments.getIdeal2Payment()",
+    "rank": -0.027568743709861565
+  },
+  {
+    "idx": 62,
+    "name": "bspc-incassobeheer/zoekIncassos",
+    "rank": -0.029572470437374557
+  },
+  {
+    "idx": 91,
+    "name": "bspc-productinzicht/GET",
+    "rank": -0.03698076561257038
+  },
+  {
+    "idx": 92,
+    "name": "bspc-productinzicht/HEAD",
+    "rank": -0.042844482432082345
+  },
+  {
+    "idx": 146,
+    "name": "bspx-mijn-rekening/getAantalGeweigerdeTransacties",
+    "rank": -0.04843370358837112
+  },
+  {
+    "idx": 57,
+    "name": "bspc-incassobeheer/GET",
+    "rank": -0.05350578272072993
+  },
+  {
+    "idx": 235,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/{ACCOUNT}/transacties/{TIME}",
+    "rank": -0.054614645342758526
+  },
+  {
+    "idx": 152,
+    "name": "bspx-mijn-rekening/getTransactie",
+    "rank": -0.05523346641570111
+  },
+  {
+    "idx": 191,
+    "name": "retail-gateway//mbp-application/",
+    "rank": -0.057923289477882584
+  },
+  {
+    "idx": 231,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/{ACCOUNT}/aantal-geweigerde-transacties",
+    "rank": -0.058900916559525576
+  },
+  {
+    "idx": 147,
+    "name": "bspx-mijn-rekening/getRekening",
+    "rank": -0.06777267545090541
+  },
+  {
+    "idx": 39,
+    "name": "bspc-hypotheekaflossingproces/GET",
+    "rank": -0.06790544874858526
+  },
+  {
+    "idx": 40,
+    "name": "bspc-hypotheekaflossingproces/heeftAflossingdetails",
+    "rank": -0.06803309089801444
+  },
+  {
+    "idx": 230,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/{ACCOUNT}",
+    "rank": -0.06828495058121455
+  },
+  {
+    "idx": 187,
+    "name": "mbp/PATCH",
+    "rank": -0.07063168752009845
+  },
+  {
+    "idx": 185,
+    "name": "mbp/BSP: Ideal2Client: Submitting iDEAL2 transaction",
+    "rank": -0.07125771464230994
+  },
+  {
+    "idx": 190,
+    "name": "mbp/Payments.submitIdeal2Payment()",
+    "rank": -0.0712771835392916
+  },
+  {
+    "idx": 242,
+    "name": "retail-gateway/POST:/mbp-application/pm/s",
+    "rank": -0.07142248379935065
+  },
+  {
+    "idx": 97,
+    "name": "bspc-productinzicht/geefProductgroepen",
+    "rank": -0.0774968145535794
+  },
+  {
+    "idx": 1,
+    "name": "WebSAS/POST",
+    "rank": -0.08144435610570709
+  },
+  {
+    "idx": 149,
+    "name": "bspx-mijn-rekening/getRekeninginzicht",
+    "rank": -0.10149828278139474
+  },
+  {
+    "idx": 238,
+    "name": "retail-gateway/GET:/services/apix-mobiel-accounts/api/cards",
+    "rank": -0.10954129477715037
+  },
+  {
+    "idx": 105,
+    "name": "bspc-rekeninginzicht/getRekeningen",
+    "rank": -0.11135556985077615
+  },
+  {
+    "idx": 171,
+    "name": "lsm/nl.devolksbank.bspc.sessiebeheer.GetOneSessionOperation.doGetOneSession",
+    "rank": -0.11231098691390398
+  },
+  {
+    "idx": 165,
+    "name": "lsm/getOneSession",
+    "rank": -0.11232027566120234
+  },
+  {
+    "idx": 247,
+    "name": "sas/LfiREntrypoint",
+    "rank": -0.11251841209350459
+  },
+  {
+    "idx": 232,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/{ACCOUNT}/inzicht",
+    "rank": -0.11263470328416389
+  },
+  {
+    "idx": 174,
+    "name": "lsm/nl.devolksbank.bspc.tokenbeheer.tokens.GetOneTokenOperation.doGetOneToken",
+    "rank": -0.1127143805914099
+  },
+  {
+    "idx": 167,
+    "name": "lsm/getOneToken",
+    "rank": -0.11273785639691213
+  },
+  {
+    "idx": 88,
+    "name": "bspc-partijrolbeheer/POST",
+    "rank": -0.1132449490121676
+  },
+  {
+    "idx": 162,
+    "name": "lsm/get",
+    "rank": -0.1147328843990582
+  },
+  {
+    "idx": 26,
+    "name": "bspc-betaalpasbeheer/POST",
+    "rank": -0.1190932877441479
+  },
+  {
+    "idx": 115,
+    "name": "bspc-spaarpotbeheer/getSpaarpottenTransacties",
+    "rank": -0.12246890584421878
+  },
+  {
+    "idx": 2,
+    "name": "WebSAS/SasFlow",
+    "rank": -0.12430352592369871
+  },
+  {
+    "idx": 96,
+    "name": "bspc-productinzicht/geefProducten",
+    "rank": -0.14269520395449672
+  },
+  {
+    "idx": 71,
+    "name": "bspc-klantinstellingenbeheer/Query",
+    "rank": -0.14793880815087415
+  },
+  {
+    "idx": 72,
+    "name": "bspc-klantinstellingenbeheer/geefKlantinstellingen",
+    "rank": -0.15437254305064152
+  },
+  {
+    "idx": 9,
+    "name": "bspc-adresboekbeheer/getAdresboekvermeldingen",
+    "rank": -0.1579286852510036
+  },
+  {
+    "idx": 8,
+    "name": "bspc-adresboekbeheer/Query",
+    "rank": -0.15819056463070505
+  },
+  {
+    "idx": 145,
+    "name": "bspx-mijn-rekening/POST",
+    "rank": -0.1822505447941471
+  },
+  {
+    "idx": 159,
+    "name": "lsm/Query",
+    "rank": -0.18632725489486282
+  },
+  {
+    "idx": 106,
+    "name": "bspc-rekeninginzicht/getTransaction",
+    "rank": -0.20392220233952305
+  },
+  {
+    "idx": 114,
+    "name": "bspc-spaarpotbeheer/getSpaarpotten",
+    "rank": -0.20918845935443497
+  },
+  {
+    "idx": 110,
+    "name": "bspc-spaarpotbeheer/Query",
+    "rank": -0.29087745867175413
+  },
+  {
+    "idx": 122,
+    "name": "bspr-betalen-informatie/Query",
+    "rank": -0.33177655115887367
+  },
+  {
+    "idx": 123,
+    "name": "bspr-betalen-informatie/getSetnummer",
+    "rank": -0.3319264674744766
+  },
+  {
+    "idx": 89,
+    "name": "bspc-partijrolbeheer/zoekRekeningRollen",
+    "rank": -0.33534612378461015
+  },
+  {
+    "idx": 108,
+    "name": "bspc-spaarpotbeheer/GET",
+    "rank": -0.40464506135489375
+  },
+  {
+    "idx": 76,
+    "name": "bspc-klantinzicht/geefKlantDetails",
+    "rank": -0.4722169055267669
+  },
+  {
+    "idx": 150,
+    "name": "bspx-mijn-rekening/getSchakelaar",
+    "rank": -1.7606353789608793
+  },
+  {
+    "idx": 237,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/schakelaars/{ACCOUNT}",
+    "rank": -1.763488186500931
+  },
+  {
+    "idx": 4,
+    "name": "bspa-ideal-issuer/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 5,
+    "name": "bspa-ideal-issuer/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 6,
+    "name": "bspa-ideal-issuer/logPayload",
+    "rank": -1000.0
+  },
+  {
+    "idx": 7,
+    "name": "bspa-ideal-issuer/postStatusReq",
+    "rank": -1000.0
+  },
+  {
+    "idx": 10,
+    "name": "bspc-apimachtigingbeheer-hoofdschakelaar/getSchakelaar",
+    "rank": -1000.0
+  },
+  {
+    "idx": 18,
+    "name": "bspc-bestedingbeheer/deleteBesteding",
+    "rank": -1000.0
+  },
+  {
+    "idx": 20,
+    "name": "bspc-betaal-en-spaarrekeningbeheer/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 21,
+    "name": "bspc-betaal-en-spaarrekeningbeheer/getAccount",
+    "rank": -1000.0
+  },
+  {
+    "idx": 28,
+    "name": "bspc-betaalpasbeheer/zoekBetaalpassenAanvragen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 29,
+    "name": "bspc-betaalpasbeheer/zoekBetaalpassenAutorisaties",
+    "rank": -1000.0
+  },
+  {
+    "idx": 30,
+    "name": "bspc-digitaal-adres/PUT",
+    "rank": -1000.0
+  },
+  {
+    "idx": 32,
+    "name": "bspc-digitaal-adres/Update",
+    "rank": -1000.0
+  },
+  {
+    "idx": 33,
+    "name": "bspc-digitaal-adres/geefTelefoonnummer",
+    "rank": -1000.0
+  },
+  {
+    "idx": 34,
+    "name": "bspc-digitaal-adres/notifyRiskshield",
+    "rank": -1000.0
+  },
+  {
+    "idx": 35,
+    "name": "bspc-digitaal-adres/wijzigTelefoonnummer",
+    "rank": -1000.0
+  },
+  {
+    "idx": 37,
+    "name": "bspc-digitaal-adres/zoekTelefoonnummers",
+    "rank": -1000.0
+  },
+  {
+    "idx": 38,
+    "name": "bspc-digitalekluisbeheer/getDocumentsInfo",
+    "rank": -1000.0
+  },
+  {
+    "idx": 41,
+    "name": "bspc-hypotheekextrastortenproces/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 42,
+    "name": "bspc-hypotheekextrastortenproces/magExtraStorten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 46,
+    "name": "bspc-ideal/DELETE",
+    "rank": -1000.0
+  },
+  {
+    "idx": 52,
+    "name": "bspc-ideal/logApplicationVersion",
+    "rank": -1000.0
+  },
+  {
+    "idx": 53,
+    "name": "bspc-ideal/ophalenTransactie",
+    "rank": -1000.0
+  },
+  {
+    "idx": 55,
+    "name": "bspc-ideal/retryPayments",
+    "rank": -1000.0
+  },
+  {
+    "idx": 56,
+    "name": "bspc-ideal/reversePayments",
+    "rank": -1000.0
+  },
+  {
+    "idx": 58,
+    "name": "bspc-incassobeheer/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 60,
+    "name": "bspc-incassobeheer/geefIncasso",
+    "rank": -1000.0
+  },
+  {
+    "idx": 61,
+    "name": "bspc-incassobeheer/geefToestemmingslijst",
+    "rank": -1000.0
+  },
+  {
+    "idx": 63,
+    "name": "bspc-klantbeheer/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 64,
+    "name": "bspc-klantbeheer/geefDetailsKlant",
+    "rank": -1000.0
+  },
+  {
+    "idx": 65,
+    "name": "bspc-klantbeheer/zoekBlokkadesKlant",
+    "rank": -1000.0
+  },
+  {
+    "idx": 66,
+    "name": "bspc-klantbeheer-contactgegevens/DELETE",
+    "rank": -1000.0
+  },
+  {
+    "idx": 67,
+    "name": "bspc-klantbeheer-contactgegevens/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 68,
+    "name": "bspc-klantbeheer-contactgegevens/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 69,
+    "name": "bspc-klantbeheer-contactgegevens/PUT",
+    "rank": -1000.0
+  },
+  {
+    "idx": 70,
+    "name": "bspc-klantbeheer-contactgegevens/wijzigSigneertaak",
+    "rank": -1000.0
+  },
+  {
+    "idx": 73,
+    "name": "bspc-klantinteractiebeheer/maakContactmoment",
+    "rank": -1000.0
+  },
+  {
+    "idx": 78,
+    "name": "bspc-notificatiebeheer/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 79,
+    "name": "bspc-notificatiebeheer/addNotificatie",
+    "rank": -1000.0
+  },
+  {
+    "idx": 87,
+    "name": "bspc-outputgeneratiebeheer/generateDocument",
+    "rank": -1000.0
+  },
+  {
+    "idx": 90,
+    "name": "bspc-partijrolbeheer/zoekRollen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 93,
+    "name": "bspc-productinzicht/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 98,
+    "name": "bspc-productinzicht/geefZelfRegelenDetails",
+    "rank": -1000.0
+  },
+  {
+    "idx": 99,
+    "name": "bspc-rekeningbeheer-jaaroverzicht/Query",
+    "rank": -1000.0
+  },
+  {
+    "idx": 100,
+    "name": "bspc-rekeningbeheer-jaaroverzicht/getJaaroverzichten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 103,
+    "name": "bspc-rekeninginzicht/getCamtTransactions",
+    "rank": -1000.0
+  },
+  {
+    "idx": 109,
+    "name": "bspc-spaarpotbeheer/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 111,
+    "name": "bspc-spaarpotbeheer/Update",
+    "rank": -1000.0
+  },
+  {
+    "idx": 113,
+    "name": "bspc-spaarpotbeheer/getSpaarpot",
+    "rank": -1000.0
+  },
+  {
+    "idx": 116,
+    "name": "bspc-spaarpotbeheer/updateSpaarpot",
+    "rank": -1000.0
+  },
+  {
+    "idx": 120,
+    "name": "bspr-betaal-en-spaarrekeningbeheer-eb/getAccount",
+    "rank": -1000.0
+  },
+  {
+    "idx": 129,
+    "name": "bspx-mijn-betalen-overboeken/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 130,
+    "name": "bspx-mijn-betalen-overboeken/getRekeningen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 131,
+    "name": "bspx-mijn-klant-betaalpassen/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 132,
+    "name": "bspx-mijn-klant-betaalpassen/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 133,
+    "name": "bspx-mijn-klant-betaalpassen/zoekBetaalpassen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 134,
+    "name": "bspx-mijn-klant-documenten/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 135,
+    "name": "bspx-mijn-klant-documenten/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 136,
+    "name": "bspx-mijn-klant-documenten/zoekDocument",
+    "rank": -1000.0
+  },
+  {
+    "idx": 137,
+    "name": "bspx-mijn-klant-documenten/zoekDocumenten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 138,
+    "name": "bspx-mijn-klant-inlogmiddelen/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 139,
+    "name": "bspx-mijn-klant-inlogmiddelen/POST",
+    "rank": -1000.0
+  },
+  {
+    "idx": 140,
+    "name": "bspx-mijn-klant-inlogmiddelen/geefDagbestedingslimieten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 141,
+    "name": "bspx-mijn-klant-inlogmiddelen/zoekInlogmiddelen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 142,
+    "name": "bspx-mijn-klant-productcatalogus/GET",
+    "rank": -1000.0
+  },
+  {
+    "idx": 143,
+    "name": "bspx-mijn-klant-productcatalogus/getProducten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 153,
+    "name": "bspx-mijn-rekening/getTransactieActies",
+    "rank": -1000.0
+  },
+  {
+    "idx": 161,
+    "name": "lsm/deleteOneSessionStore",
+    "rank": -1000.0
+  },
+  {
+    "idx": 163,
+    "name": "lsm/getDevices",
+    "rank": -1000.0
+  },
+  {
+    "idx": 166,
+    "name": "lsm/getOneSessionStore",
+    "rank": -1000.0
+  },
+  {
+    "idx": 168,
+    "name": "lsm/getTokens",
+    "rank": -1000.0
+  },
+  {
+    "idx": 169,
+    "name": "lsm/getUserLimits",
+    "rank": -1000.0
+  },
+  {
+    "idx": 170,
+    "name": "lsm/nl.devolksbank.bspc.sessiebeheer.DeleteOneSessionStoreOperation.doDeleteOneSessionStore",
+    "rank": -1000.0
+  },
+  {
+    "idx": 172,
+    "name": "lsm/nl.devolksbank.bspc.sessiebeheer.GetOneSessionStoreOperation.doGetOneSessionStore",
+    "rank": -1000.0
+  },
+  {
+    "idx": 173,
+    "name": "lsm/nl.devolksbank.bspc.tokenbeheer.devices.GetDevicesOperation.doGetDevices",
+    "rank": -1000.0
+  },
+  {
+    "idx": 175,
+    "name": "lsm/nl.devolksbank.bspc.tokenbeheer.tokens.GetTokensOperation.doGetTokens",
+    "rank": -1000.0
+  },
+  {
+    "idx": 178,
+    "name": "lsm/remove",
+    "rank": -1000.0
+  },
+  {
+    "idx": 180,
+    "name": "lsm/tryLock",
+    "rank": -1000.0
+  },
+  {
+    "idx": 181,
+    "name": "lsm/unlock",
+    "rank": -1000.0
+  },
+  {
+    "idx": 183,
+    "name": "mbp/BSP: Ideal2Client: Cancelling iDEAL2 transaction",
+    "rank": -1000.0
+  },
+  {
+    "idx": 188,
+    "name": "mbp/Payments.cancelIdeal2Payment()",
+    "rank": -1000.0
+  },
+  {
+    "idx": 192,
+    "name": "retail-gateway//online/rest/ideal/issuer/messages",
+    "rank": -1000.0
+  },
+  {
+    "idx": 194,
+    "name": "retail-gateway//services/apic-incassobeheer/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 195,
+    "name": "retail-gateway//services/apic-klantbeheer-contactgegevens/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 196,
+    "name": "retail-gateway//services/apic-partijrolbeheer/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 198,
+    "name": "retail-gateway//services/apic-spaarpotbeheer/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 199,
+    "name": "retail-gateway//services/apix-mijn-betalen-overboeken/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 200,
+    "name": "retail-gateway//services/apix-mijn-klant-betaalpassen/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 201,
+    "name": "retail-gateway//services/apix-mijn-klant-documenten/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 202,
+    "name": "retail-gateway//services/apix-mijn-klant-inlogmiddelen/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 203,
+    "name": "retail-gateway//services/apix-mijn-klant-productcatalogus/api",
+    "rank": -1000.0
+  },
+  {
+    "idx": 208,
+    "name": "retail-gateway/GET:/services/apic-incassobeheer/api/rekeningen/{BASE}/incassos",
+    "rank": -1000.0
+  },
+  {
+    "idx": 209,
+    "name": "retail-gateway/GET:/services/apic-incassobeheer/api/rekeningen/{BASE}/toestemmingslijsten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 210,
+    "name": "retail-gateway/GET:/services/apic-partijrolbeheer/api/rekening-rollen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 215,
+    "name": "retail-gateway/GET:/services/apic-productinzicht/api/zelf-regelen-details",
+    "rank": -1000.0
+  },
+  {
+    "idx": 216,
+    "name": "retail-gateway/GET:/services/apic-spaarpotbeheer/api/spaarpotten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 217,
+    "name": "retail-gateway/GET:/services/apic-spaarpotbeheer/api/spaarpotten/{SAVINGS}",
+    "rank": -1000.0
+  },
+  {
+    "idx": 218,
+    "name": "retail-gateway/GET:/services/apix-mijn-betalen-overboeken/api/rekeningen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 219,
+    "name": "retail-gateway/GET:/services/apix-mijn-klant-betaalpassen/api/betaalpassen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 220,
+    "name": "retail-gateway/GET:/services/apix-mijn-klant-documenten/api/documenten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 221,
+    "name": "retail-gateway/GET:/services/apix-mijn-klant-documenten/api/documenten/jaaroverzicht-mijn-{VIEW}",
+    "rank": -1000.0
+  },
+  {
+    "idx": 222,
+    "name": "retail-gateway/GET:/services/apix-mijn-klant-inlogmiddelen/api/dagbestedingslimieten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 223,
+    "name": "retail-gateway/GET:/services/apix-mijn-klant-inlogmiddelen/api/inlogmiddelen",
+    "rank": -1000.0
+  },
+  {
+    "idx": 224,
+    "name": "retail-gateway/GET:/services/apix-mijn-klant-productcatalogus/api/producten",
+    "rank": -1000.0
+  },
+  {
+    "idx": 227,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/68025/aantal-geweigerde-transacties",
+    "rank": -1000.0
+  },
+  {
+    "idx": 228,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/68025/inzicht",
+    "rank": -1000.0
+  },
+  {
+    "idx": 229,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/68025/transacties",
+    "rank": -1000.0
+  },
+  {
+    "idx": 234,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/{ACCOUNT}/transacties/{TIME2}",
+    "rank": -1000.0
+  },
+  {
+    "idx": 236,
+    "name": "retail-gateway/GET:/services/apix-mijn-rekening/api/rekeningen/{ACCOUNT}/transacties/{TIME}/acties",
+    "rank": -1000.0
+  },
+  {
+    "idx": 243,
+    "name": "retail-gateway/POST:/mbp-application/pm/t",
+    "rank": -1000.0
+  },
+  {
+    "idx": 244,
+    "name": "retail-gateway/POST:/online/rest/ideal/issuer/messages/statusReq",
+    "rank": -1000.0
+  },
+  {
+    "idx": 245,
+    "name": "retail-gateway/PUT:/services/apic-klantbeheer-contactgegevens/api/signeertaken/{SAVINGS}",
+    "rank": -1000.0
+  },
+  {
+    "idx": 246,
+    "name": "retail-gateway/PUT:/services/apic-spaarpotbeheer/api/spaarpotten/{SAVINGS}",
+    "rank": -1000.0
+  }
+]

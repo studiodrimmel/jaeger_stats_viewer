@@ -1,0 +1,28 @@
+<app-page-header [pageName]="pageName" [breadcrumb]="breadcrumb">
+    <app-dashboard-header-metrics
+        metrics
+        [users]="3322"
+        [sessions]="4591"
+        [duration]="2.32"
+    ></app-dashboard-header-metrics>
+</app-page-header>
+
+<app-dashboard-filterbar
+    [processes]="processes"
+></app-dashboard-filterbar>
+
+<div class="grid mt-0 gap-5">
+    <div class="col">
+        <ng-container *ngIf="!chartsError; else chartErrorMessage">
+            <app-process-charts 
+                [processes]="processes"
+            ></app-process-charts>
+        </ng-container>
+        <ng-template #chartErrorMessage>
+            <p>{{ chartsError }}</p>
+        </ng-template>
+    </div>
+    <div class="col">
+        <app-related-processes></app-related-processes>
+    </div>
+</div>

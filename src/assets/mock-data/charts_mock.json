@@ -1,0 +1,38 @@
+{
+  "title": "retail-gateway//services/apic-productinzicht/api",
+    "description": [
+    ["Best Model", "Linear"],
+    ["Param X", "0.345"]
+  ],
+  "labels": [
+    "1",
+    "2",
+    "3"
+  ],
+  "lines": [
+    {
+      "label": "Observed",
+      "data": [
+        1.2,
+        2.5,
+        3.3
+      ]
+    },
+    {
+      "label": "y=1.0 + 1.0*x",
+      "data": [
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    {
+      "label": "y=1.0 *1.05^x",
+      "data": [
+        1.0,
+        2.0,
+        4.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<section>
+    <header class="mb-2">
+        <h2 class="font-medium mb-2">Related processes</h2>
+    </header>
+
+    <p-autoComplete styleClass="mb-2" [style]="{
+        width: '100%'
+    }" [autoHighlight]="true" [(ngModel)]="selectedProcess" [suggestions]="filteredProcesses" field="name"
+    placeholder="Search related process..." [dropdown]="true" (onSelect)="changeProcess($event)"
+    (completeMethod)="filterProcess($event)">
+    <ng-template let-process pTemplate="item">
+        <span class="block">{{ process.name }}</span>
+        <small [ngClass]="{
+        'text-orange-500': process.rank >= 0.5,
+        'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
+        'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
+        'text-indigo-500': process.rank < 0.1,
+    }">{{ process.rank }}</small>
+    </ng-template>
+</p-autoComplete>
+
+<!-- Selected process -->
+<ng-container *ngIf="_dashboard.selectedProcess$ | async as process">
+    <small class="block mb-4 text-500">Selected: {{ process.name }}</small>
+</ng-container>
+    <p class="text-600">No related processes yet</p>
+
+</section>

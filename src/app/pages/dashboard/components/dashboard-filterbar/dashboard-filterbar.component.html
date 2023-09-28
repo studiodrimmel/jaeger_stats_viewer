@@ -1,0 +1,5 @@
+<div class="card gap-2 mt-4 mb-4">
+    <h2 class="font-medium mb-2">Ranking</h2>
+    <p-selectButton [(ngModel)]="selectedRanking" [options]="rankingOptions" optionLabel="label"
+        (onChange)="changeRanking($event.value)"></p-selectButton>
+</div>
