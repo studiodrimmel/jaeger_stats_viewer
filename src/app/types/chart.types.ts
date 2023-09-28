@@ -5,6 +5,8 @@ export type ChartLine = {
 
 export interface ChartData {
     title: string;
+    metric?: string;
+    process?: string;
     description: string[][];
     labels: String[];
     lines: ChartLine[]

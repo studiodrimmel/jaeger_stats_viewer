@@ -11,15 +11,12 @@
     [processes]="processes"
 ></app-dashboard-filterbar>
 
-<!-- Selected process -->
-<ng-container *ngIf="_dashboard.selectedProcess$ | async as process">
-    <small class="block mt-2 text-500">Selected: {{ process.name }}</small>
-</ng-container>
-
-<div class="grid mt-4 gap-5">
+<div class="grid mt-0 gap-5">
     <div class="col">
         <ng-container *ngIf="!chartsError; else chartErrorMessage">
-            <app-process-charts></app-process-charts>
+            <app-process-charts 
+                [processes]="processes"
+            ></app-process-charts>
         </ng-container>
         <ng-template #chartErrorMessage>
             <p>{{ chartsError }}</p>
