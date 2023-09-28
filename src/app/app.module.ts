@@ -5,12 +5,11 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from "./app.component";
-import { JaegerChartComponent } from './components/jaeger-chart/jaeger-chart.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent, JaegerChartComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
