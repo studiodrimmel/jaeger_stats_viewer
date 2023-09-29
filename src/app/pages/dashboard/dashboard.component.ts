@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { PageHeaderComponent } from '../../components/layout/page-header/page-header.component';
 import {
   DashboardHeaderMetricsComponent
 } from './components/dashboard-header-metrics/dashboard-header-metrics.component';
@@ -14,7 +14,7 @@ import { RANKING_METRICS, RANKING_OPTIONS } from './dashboard.constants';
 import { DashboardFilterbarComponent } from "./components/dashboard-filterbar/dashboard-filterbar.component";
 import { DashboardService } from './dashboard.service';
 import { Ranking } from 'src/app/types';
-import { catchError, distinctUntilChanged, forkJoin, skip } from 'rxjs';
+import { distinctUntilChanged, forkJoin, skip } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
 
@@ -56,11 +56,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProcesses();
-
     this._dashboard.selectedRanking$.pipe(
-      skip(1),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     ).subscribe((ranking) => {
       this.getAllProcesses(ranking);
     });
@@ -70,7 +67,7 @@ export class DashboardComponent implements OnInit {
     ).subscribe(process => this.getChartsForProcess(process))
   }
 
-  private getAllProcesses(ranking?: Ranking) {
+  private getAllProcesses(ranking: Ranking) {
     this._jaeger.getProcesses(ranking).subscribe(processes => {
       this.processes = processes;
       this._dashboard.selectedProcess$.next(processes[0]);
