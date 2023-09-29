@@ -14,7 +14,7 @@ import { RANKING_METRICS, RANKING_OPTIONS } from './dashboard.constants';
 import { DashboardFilterbarComponent } from "./components/dashboard-filterbar/dashboard-filterbar.component";
 import { DashboardService } from './dashboard.service';
 import { Ranking } from 'src/app/types';
-import { distinctUntilChanged, forkJoin, skip } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, forkJoin, skip, switchMap, tap } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
 
@@ -43,10 +43,11 @@ export class DashboardComponent implements OnInit {
 
   // Processes
   processes: Process[] = [];
-  selectedProcess: Process;
+  relatedProcesses: Process[] = [];
 
   // Charts
   chartsError: string | null = null;
+  chartsRelatedError: string | null = null;
 
   constructor(
     public _jaeger: JaegerDataService,
@@ -56,15 +57,50 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Get all processes when the ranking changes
     this._dashboard.selectedRanking$.pipe(
       distinctUntilChanged(),
     ).subscribe((ranking) => {
       this.getAllProcesses(ranking);
     });
 
+    // Get charts for the main process
     this._dashboard.selectedProcess$.pipe(
-      distinctUntilChanged()
-    ).subscribe(process => this.getChartsForProcess(process))
+      distinctUntilChanged(),
+      tap(() => this._dashboard.clearRelatedProcess()),
+      switchMap((process) => this.getChartsForProcess(process))
+    ).subscribe({
+      next: chartData => {
+        this.chartsError = null;
+        this._dashboard.chartData$.next(chartData);
+      },
+      error: () => this.chartsError = 'Oops, couldn\'t get the charts'
+    });
+
+    // Get related processes when the main process or the ranking changes
+    combineLatest([
+      this._dashboard.selectedProcess$,
+      this._dashboard.selectedRanking$
+    ]).pipe(
+      distinctUntilChanged(),
+      filter(([process, ranking]) => !!process && !!ranking),
+      switchMap(([process, ranking]) => this._jaeger.getRelatedProcesses(process.name, ranking)),
+    ).subscribe(relatedProcesses => {
+      this.relatedProcesses = relatedProcesses;
+    });
+
+    // Get charts for the related process
+    this._dashboard.selectedRelatedProcess$.pipe(
+      distinctUntilChanged(),
+      filter(process => !!process),
+      switchMap((process) => this.getChartsForProcess(process as Process))
+    ).subscribe({
+      next: chartData => {
+        this.chartsRelatedError = null;
+        this._dashboard.relatedProcessesChartData$.next(chartData);
+      },
+      error: () => this.chartsRelatedError = 'Oops, couldn\'t get the related charts'
+    });
   }
 
   private getAllProcesses(ranking: Ranking) {
@@ -75,13 +111,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private getChartsForProcess(process: Process) {
-    this.chartsError = null;
     const obs = RANKING_METRICS.map(metric => this._jaeger.getChartData(process.name, metric));
-
-    // Get chart data for every metric
-    forkJoin(obs).subscribe({
-      next: chartData => this._dashboard.chartData$.next(chartData),
-      error: () => this.chartsError = 'Oops, couldn\'t get the charts'
-    });
+    return forkJoin(obs);
   }
 }

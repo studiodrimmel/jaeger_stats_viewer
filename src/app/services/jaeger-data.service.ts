@@ -3,7 +3,7 @@ import { from, map, Observable, tap } from 'rxjs';
 import { ChartData, Ranking } from '../types';
 import { invoke } from '@tauri-apps/api';
 import { debug, info } from 'tauri-plugin-log-api';
-import { Process } from '../types/process.type';
+import { Process } from '../types';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -16,6 +16,20 @@ export class JaegerDataService {
   ) { }
 
   getProcesses(ranking: Ranking): Observable<Process[]> {
+    // return this._http.get<Process[]>('/assets/mock-data/proces_list_mock.json').pipe(
+    //   map((processes: Process[]) => processes.sort((a, b) => 
+    //     a.rank < b.rank ? 1 : (a.rank === b.rank ? 0 : -1)
+    //   ))
+    // )
+    debug(`Calling get_process_list(${ranking})`);
+    return from(invoke<Process[]>('get_process_list', {metric: ranking.value})).pipe(
+        tap((graphs) => {
+          info(`Returned from RUST: process_list with: lenght ${graphs.length}`);
+        })
+    );
+  }
+
+  getRelatedProcesses(processName: string, ranking: Ranking): Observable<Process[]> {
     // return this._http.get<Process[]>('/assets/mock-data/proces_list_mock.json').pipe(
     //   map((processes: Process[]) => processes.sort((a, b) => 
     //     a.rank < b.rank ? 1 : (a.rank === b.rank ? 0 : -1)
