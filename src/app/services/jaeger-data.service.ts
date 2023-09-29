@@ -32,14 +32,14 @@ export class JaegerDataService {
   }
 
   getChartData(process: string, metric: string): Observable<ChartData> {
-    return this._http.get<ChartData>('/assets/mock-data/charts_mock.json').pipe(
-      map((chartData) => ({
-        ...chartData,
-        metric,
-        process
-      }))
+      debug(`Calling get_process_data(${process}, ${metric})`);
+      return this._http.get<ChartData>('/assets/mock-data/charts_mock.json').pipe(
+          map((chartData) => ({
+            ...chartData,
+            metric,
+            process
+          }))
     )
-    debug(`Calling get_process_data(${process}, ${metric})`);
     // return from(invoke<ChartData>("get_process_data", { proc_oper: process, metric: metric })).pipe(
     //   tap((chdata) => info(String(chdata)))
     // );
