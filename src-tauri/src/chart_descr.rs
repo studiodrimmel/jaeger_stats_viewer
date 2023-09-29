@@ -1,58 +1,58 @@
-use log::info;
+use log::{error, info};
+use jaeger_stats::{self, ProcessListItem, ChartDataParameters, ChartLine};
+use super::backend::STITCHED;
 use serde::Serialize;
 
-
-#[derive(Serialize)]
-pub struct ProcessListItem {
-    id: isize,
-    name: String,
-}
 #[tauri::command]
-pub fn get_process_list() -> Vec<ProcessListItem> {
-    info!("BACKEND: Retrieve a process list.");    
-    vec![
-        ProcessListItem {
-            id: 1,
-            name: "Process X".to_string(),
-        },
-        ProcessListItem {
-            id: 2,
-            name: "Process Y".to_string(),
-        },
-        ProcessListItem {
-            id: 2,
-            name: "Call-path A".to_string(),
-        },
-    ]
+pub fn get_process_list(metric: Option<&str>) -> Vec<ProcessListItem> {
+    info!("BACKEND: get_process_list({metric:?})");
+    let metric = metric.unwrap_or("rate (avg)");
+
+    let guard = STITCHED.lock().unwrap();
+    match &*guard {
+        Some(stitched) => jaeger_stats::get_process_list(&stitched, metric),
+        None => {
+            error!("Not stitched data loaded");
+            Vec::new()
+        }
+    }
 }
 
-
+// export interface ChartData {
+//     title: string;
+//     metric?: string;
+//     process?: string;
+//     description: string[][];
+//     labels: String[];
+//     lines: ChartLine[]
+// }
 
 #[derive(Serialize, Debug)]
-pub struct ChartDataParameters {
+pub struct ChartData {
+    pub title: String,
+    pub metric: Option<String>,
+    pub process: Option<String>,
+    pub description: Vec<Vec<String>>, 
     pub labels: Vec<String>,
-    pub data: Vec<Vec<f64>>,
+    pub lines: Vec<ChartLine>,
 }
 
-#[tauri::command]
-pub fn get_process_data(name: &str, metric: &str) -> ChartDataParameters {
-    info!("BACKEND: Retrieve data for process={name} and metric={metric}.");    
-    let cdp = ChartDataParameters {
-        labels: vec![
-            "jan".to_string(),
-            "febr".to_string(),
-            "MaaRT".to_string(),
-            "April".to_string(),
-            "mEi".to_string(),
-            "Juni".to_string(),
-            "JulY".to_string(),
-        ],
-        data: vec![
-            vec![65.0, 59.0, 80.0, 81.0, 56.0, 55.0, 40.0],
-            vec![100.0, 20.0, 80.0, 75.0, 70.0, 75.0, 40.0],
-        ],
-    };
+impl ChartData {
+    pub fn new(cdp: ChartDataParameters, process: &str, metric: &str) -> Self {
+        ChartData { title: cdp.title, metric: Some(metric.to_string()), process: Some(process.to_string()), description: Vec::new(), labels: cdp.labels, lines: cdp.lines }
+    }
+}
 
-    cdp
+//TODO: return value should be an Optional
+#[tauri::command]
+pub fn get_process_data(proc_oper: &str, metric: &str) -> ChartData {
+    info!("BACKEND: get_process_data({proc_oper}, {metric})");    
+    let guard = STITCHED.lock().unwrap();
+    match &*guard {
+        Some(stitched) => ChartData::new(jaeger_stats::get_proc_oper_chart_data(&stitched, proc_oper, metric).unwrap(), proc_oper, metric),
+        None => {
+            panic!("Not stitched data loaded");
+        }
+    }
 }
 

@@ -3,7 +3,7 @@ use std::{path::Path, sync::Mutex};
 use log::{info, error};
 
 
-static STITCHED: Mutex<Option<Stitched>> = Mutex::new(None);
+pub static STITCHED: Mutex<Option<Stitched>> = Mutex::new(None);
 
 pub fn set_stitched_data(val: Stitched) {
     let mut guard = STITCHED.lock().unwrap();
