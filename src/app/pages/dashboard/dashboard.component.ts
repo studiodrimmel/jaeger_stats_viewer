@@ -56,10 +56,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProcesses();
-
     this._dashboard.selectedRanking$.pipe(
-      skip(1),
       distinctUntilChanged(),
     ).subscribe((ranking) => {
       this.getAllProcesses(ranking);
@@ -70,7 +67,7 @@ export class DashboardComponent implements OnInit {
     ).subscribe(process => this.getChartsForProcess(process))
   }
 
-  private getAllProcesses(ranking?: Ranking) {
+  private getAllProcesses(ranking: Ranking) {
     this._jaeger.getProcesses(ranking).subscribe(processes => {
       this.processes = processes;
       this._dashboard.selectedProcess$.next(processes[0]);
