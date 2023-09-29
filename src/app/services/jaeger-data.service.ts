@@ -17,14 +17,14 @@ export class JaegerDataService {
     private readonly _http: HttpClient
   ) { }
 
-  getProcesses(ranking?: Ranking): Observable<Process[]> {
+  getProcesses(ranking: Ranking): Observable<Process[]> {
     // return this._http.get<Process[]>('/assets/mock-data/proces_list_mock.json').pipe(
     //   map((processes: Process[]) => processes.sort((a, b) => 
     //     a.rank < b.rank ? 1 : (a.rank === b.rank ? 0 : -1)
     //   ))
     // )
     debug(`Calling get_process_list(${ranking})`);
-    return from(invoke<Process[]>('get_process_list', {metric: ranking})).pipe(
+    return from(invoke<Process[]>('get_process_list', {metric: ranking.value})).pipe(
         tap((graphs) => {
           info(`Returned from RUST: process_list with: lenght ${graphs.length}`);
         })
