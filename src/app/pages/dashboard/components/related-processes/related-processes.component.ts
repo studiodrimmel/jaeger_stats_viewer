@@ -1,9 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Process } from 'src/app/types';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { DashboardService } from '../../dashboard.service';
+import { map, Observable } from 'rxjs';
+import { ChartModule } from 'primeng/chart';
+import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-related-processes',
@@ -11,22 +14,35 @@ import { DashboardService } from '../../dashboard.service';
   imports: [
     CommonModule,
     FormsModule,
+    ChartModule,
+    PanelModule,
     AutoCompleteModule
   ],
   templateUrl: './related-processes.component.html'
 })
-export class RelatedProcessesComponent {
+export class RelatedProcessesComponent implements OnInit {
   @Input() processes: Process[]
 
+  charts$: Observable<any>
+
   // Processes
-  selectedProcess: Process;
-  filteredProcesses: Process[] = [];
+  selectedRelatedProcess: Process | null;
+  filteredRelatedProcesses: Process[] = [];
 
   constructor(
     public _dashboard: DashboardService
-  ) {}
+  ) {
+    this._dashboard.selectedRelatedProcess$.subscribe(process => this.selectedRelatedProcess = process);
+  }
+
+  ngOnInit(): void {
+    this.charts$ = this._dashboard.relatedProcessesChartData$.pipe(
+      map(chartData => chartData.map(data => this._dashboard.buildChartDatasetFromChartData(data)))
+    );
+  }
 
   changeProcess(process: Process) {
+    this._dashboard.selectedRelatedProcess$.next(process);
   }
 
   filterProcess(event: AutoCompleteCompleteEvent) {
@@ -40,6 +56,6 @@ export class RelatedProcessesComponent {
       }
     }
 
-    this.filteredProcesses = filtered;
+    this.filteredRelatedProcesses = filtered;
   }
 }

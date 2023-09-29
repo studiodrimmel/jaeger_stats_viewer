@@ -34,7 +34,7 @@
         <small class="block mb-4 text-500">Selected: {{ process.name }}</small>
     </ng-container>
 
-    <p-panel *ngFor="let chart of charts$ | async" [header]="getChartPanelHeader(chart.metric)" [toggleable]="true"
+    <p-panel *ngFor="let chart of charts$ | async" [header]="_dashboard.getChartPanelHeader(chart.metric)" [toggleable]="true"
         toggler="header" styleClass="mb-3">
         <p-chart type="line" [data]="chart.data" [width]="'100%'" [height]="'275px'"></p-chart>
 

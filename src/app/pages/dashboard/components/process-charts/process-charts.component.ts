@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { DashboardService } from '../../dashboard.service';
-import { ChartData, Process } from 'src/app/types';
+import {  Process } from 'src/app/types';
 import { map, Observable } from 'rxjs';
 import { RANKING_OPTIONS } from '../../dashboard.constants';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
@@ -39,12 +39,8 @@ export class ProcessChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.charts$ = this._dashboard.chartData$.pipe(
-      map(chartData => chartData.map(data => this.buildChartData(data)))
+      map(chartData => chartData.map(data => this._dashboard.buildChartDatasetFromChartData(data)))
     );
-  }
-
-  getChartPanelHeader(metric: string) {
-    return RANKING_OPTIONS.find(opt => opt.value === metric)?.label;
   }
 
   changeProcess(process: Process) {
@@ -63,23 +59,5 @@ export class ProcessChartsComponent implements OnInit {
     }
 
     this.filteredProcesses = filtered;
-  }
-  
-  private buildChartData(chartData: ChartData): any {
-    const { title, description, metric, process, labels, lines } = chartData;
-    return {
-      title: title,
-      description,
-      metric,
-      process,
-      data: {
-        labels: labels,
-        datasets: lines.map(line => ({
-          ...line,
-          tension: 0.5,
-          fill: false
-        }))
-      }
-    }
   }
 }
