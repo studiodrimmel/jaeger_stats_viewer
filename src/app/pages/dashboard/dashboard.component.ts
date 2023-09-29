@@ -14,7 +14,7 @@ import { RANKING_METRICS, RANKING_OPTIONS } from './dashboard.constants';
 import { DashboardFilterbarComponent } from "./components/dashboard-filterbar/dashboard-filterbar.component";
 import { DashboardService } from './dashboard.service';
 import { Ranking } from 'src/app/types';
-import { catchError, distinctUntilChanged, forkJoin, skip } from 'rxjs';
+import { distinctUntilChanged, forkJoin, skip } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
 
@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
 
     this._dashboard.selectedRanking$.pipe(
       skip(1),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     ).subscribe((ranking) => {
       this.getAllProcesses(ranking);
     });
