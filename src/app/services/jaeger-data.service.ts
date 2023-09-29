@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { InvokeArgs } from '@tauri-apps/api/tauri';
 import { from, map, Observable, tap } from 'rxjs';
 import { ChartData, Ranking } from '../types';
 import { invoke } from '@tauri-apps/api';
 import { debug, info } from 'tauri-plugin-log-api';
-import { Graph } from '../types/graph.types';
 import { Process } from '../types/process.type';
 import { HttpClient } from '@angular/common/http';
 
