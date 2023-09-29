@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { PageHeaderComponent } from '../../components/layout/page-header/page-header.component';
 import {
   DashboardHeaderMetricsComponent
 } from './components/dashboard-header-metrics/dashboard-header-metrics.component';
