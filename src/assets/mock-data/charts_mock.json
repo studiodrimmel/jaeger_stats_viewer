@@ -14,7 +14,7 @@
       "label": "Observed",
       "data": [
         1.2,
-        2.5,
+        null,
         3.3
       ]
     },

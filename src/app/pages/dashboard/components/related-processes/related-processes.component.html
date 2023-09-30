@@ -1,12 +1,12 @@
 <section>
     <header class="mb-2">
-        <h2 class="font-medium mb-2">Related processes</h2>
+        <h2 class="font-medium mb-2">Call-chains details</h2>
     </header>
 
     <p-autoComplete styleClass="mb-2" [style]="{
         width: '100%'
     }" [autoHighlight]="true" [(ngModel)]="selectedRelatedProcess" [suggestions]="filteredRelatedProcesses" field="name"
-    placeholder="Search related process..." [dropdown]="true" (onSelect)="changeProcess($event)"
+    placeholder="Search related full call-chains..." [dropdown]="true" (onSelect)="changeProcess($event)"
     (completeMethod)="filterProcess($event)">
     <ng-template let-process pTemplate="item">
         <span class="block">{{ process.name }}</span>
