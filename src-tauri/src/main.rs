@@ -16,7 +16,7 @@ use backend::load_stitch_data;
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// A single json input-file that should be analysed to collect all tags
-    #[arg(short, long, default_value_t = String::from("/tmp/stitched.bincode"))]
+    #[arg(short, long, default_value_t = String::from("stitched.bincode"))]
     input_file: String,
 }
 

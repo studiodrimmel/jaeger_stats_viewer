@@ -38,6 +38,7 @@ testem.log
 /typings
 stitched.json
 *.bincode
+src-tauri/*.bincode
 
 # System files
 .DS_Store
