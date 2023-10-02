@@ -3,33 +3,31 @@
         <h2 class="font-medium mb-2">Process/operation</h2>
     </header>
 
-    <div class="flex gap-2">
-        <p-autoComplete 
-            [(ngModel)]="selectedProcess" 
-            [autoHighlight]="true" 
-            [dropdown]="true" 
-            field="display"
-            [forceSelection]="true"
-            placeholder="Search process..." 
-            styleClass="mb-2" 
-            [style]="{
-                width: '100%'
-            }" 
-            [suggestions]="filteredProcesses" 
-            (onSelect)="changeProcess($event)"
-            (completeMethod)="filterProcess($event)"
-        >
-            <ng-template let-process pTemplate="item">
-                <span class="block">{{ process.display }}</span>
-                <small [ngClass]="{
-                'text-orange-500': process.rank >= 0.5,
-                'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
-                'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
-                'text-indigo-500': process.rank < 0.1,
-            }">{{ process.rank }}</small>
-            </ng-template>
-        </p-autoComplete>
-    </div>
+    <p-autoComplete 
+        [(ngModel)]="selectedProcess" 
+        [autoHighlight]="true" 
+        [dropdown]="true" 
+        field="display"
+        [forceSelection]="true"
+        placeholder="Search process..." 
+        styleClass="mb-2" 
+        [style]="{
+            width: '100%'
+        }" 
+        [suggestions]="filteredProcesses" 
+        (onSelect)="changeProcess($event)"
+        (completeMethod)="filterProcess($event)"
+    >
+        <ng-template let-process pTemplate="item">
+            <span class="block">{{ process.display }}</span>
+            <small [ngClass]="{
+            'text-orange-500': process.rank >= 0.5,
+            'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
+            'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
+            'text-indigo-500': process.rank < 0.1,
+        }">{{ process.rank | rankingPercentage }}</small>
+        </ng-template>
+    </p-autoComplete>
 
     <!-- Selected process -->
     <ng-container *ngIf="_dashboard.selectedProcess$ | async as process">

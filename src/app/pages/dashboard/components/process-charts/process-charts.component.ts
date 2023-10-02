@@ -8,6 +8,7 @@ import { map, Observable } from 'rxjs';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { SortChartsByRankingPipe } from '../../pipes/sort-charts-by-ranking.pipe';
+import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
 
 @Component({
   selector: 'app-process-charts',
@@ -18,7 +19,8 @@ import { SortChartsByRankingPipe } from '../../pipes/sort-charts-by-ranking.pipe
     PanelModule,
     AutoCompleteModule,
     FormsModule,
-    SortChartsByRankingPipe
+    SortChartsByRankingPipe,
+    RankingPercentagePipe
   ],
   templateUrl: './process-charts.component.html'
 })
@@ -54,7 +56,7 @@ export class ProcessChartsComponent implements OnInit {
 
     for (let i = 0; i < this.processes.length; i++) {
       let process = this.processes[i];
-      if (process.display.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+      if (process.display.toLowerCase().includes(query.toLowerCase())) {
         filtered.push(process);
       }
     }

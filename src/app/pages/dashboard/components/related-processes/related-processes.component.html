@@ -29,7 +29,7 @@
                         'text-indigo-500': process.rank < 0.1,
                     }"
                 >
-                    {{ process.rank }}
+                    {{ process.rank | rankingPercentage }}
                 </small>
             </ng-template>
         </p-autoComplete>
