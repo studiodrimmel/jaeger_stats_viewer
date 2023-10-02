@@ -14,3 +14,5 @@ export const RANKING_OPTIONS: Ranking[] = [
 ];
 
 export const RANKING_METRICS = RANKING_OPTIONS.map(option => option.value);
+
+export const DEFAULT_SCOPE = 'inbound';

@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { DashboardService } from '../../dashboard.service';
-import {  Process } from 'src/app/types';
+import { Process } from 'src/app/types';
 import { map, Observable } from 'rxjs';
-import { RANKING_OPTIONS } from '../../dashboard.constants';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
+import { SortChartsByRankingPipe } from '../../pipes/sort-charts-by-ranking.pipe';
 
 @Component({
   selector: 'app-process-charts',
@@ -17,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     ChartModule,
     PanelModule,
     AutoCompleteModule,
-    FormsModule
+    FormsModule,
+    SortChartsByRankingPipe
   ],
   templateUrl: './process-charts.component.html'
 })
@@ -25,7 +26,7 @@ export class ProcessChartsComponent implements OnInit {
 
   @Input() processes: Process[]
 
-  charts$: Observable<any>
+  charts$: Observable<any[]>
 
   // Processes
   selectedProcess: Process;

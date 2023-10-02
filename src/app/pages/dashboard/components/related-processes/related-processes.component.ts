@@ -7,18 +7,22 @@ import { DashboardService } from '../../dashboard.service';
 import { map, Observable } from 'rxjs';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
+import { SortChartsByRankingPipe } from "../../pipes/sort-charts-by-ranking.pipe";
+import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
-  selector: 'app-related-processes',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ChartModule,
-    PanelModule,
-    AutoCompleteModule
-  ],
-  templateUrl: './related-processes.component.html'
+    selector: 'app-related-processes',
+    standalone: true,
+    templateUrl: './related-processes.component.html',
+    imports: [
+      CommonModule,
+      FormsModule,
+      ChartModule,
+      PanelModule,
+      AutoCompleteModule,
+      SelectButtonModule,
+      SortChartsByRankingPipe
+    ]
 })
 export class RelatedProcessesComponent implements OnInit {
   @Input() processes: Process[]
@@ -28,6 +32,10 @@ export class RelatedProcessesComponent implements OnInit {
   // Processes
   selectedRelatedProcess: Process | null;
   filteredRelatedProcesses: Process[] = [];
+
+  // Scope
+  selectedScope = 'inbound';
+  scopes = ['inbound', 'end2end']
 
   constructor(
     public _dashboard: DashboardService
@@ -39,6 +47,10 @@ export class RelatedProcessesComponent implements OnInit {
     this.charts$ = this._dashboard.relatedProcessesChartData$.pipe(
       map(chartData => chartData.map(data => this._dashboard.buildChartDatasetFromChartData(data)))
     );
+  }
+
+  changeScope(event: SelectButtonChangeEvent) {
+    this._dashboard.scope$.next(event.value);
   }
 
   changeProcess(process: Process) {

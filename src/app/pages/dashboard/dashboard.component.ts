@@ -80,44 +80,48 @@ export class DashboardComponent implements OnInit {
     // Get related processes when the main process or the ranking changes
     combineLatest([
       this._dashboard.selectedProcess$,
-      this._dashboard.selectedRanking$
+      this._dashboard.selectedRanking$,
+      this._dashboard.scope$
     ]).pipe(
       distinctUntilChanged(),
       filter(([process, ranking]) => !!process && !!ranking),
-      switchMap(([process, ranking]) => this._jaeger.getRelatedProcesses(process.display, ranking)),
+      switchMap(([process, ranking, scope]) => this._jaeger.getCallChains(process.key, ranking.value, scope)),
     ).subscribe(relatedProcesses => {
       this.relatedProcesses = relatedProcesses;
     });
 
     // Get charts for the related process
-    this._dashboard.selectedRelatedProcess$.pipe(
+    combineLatest([
+      this._dashboard.selectedRelatedProcess$,
+      this._dashboard.scope$
+    ]).pipe(
       distinctUntilChanged(),
-      filter(process => !!process),
-      switchMap((process) => this.getChartsForProcess(process as Process))
+      filter(([process]) => !!process),
+      switchMap(([process, scope]) => this.getChartsForCallChain(process as Process, scope))
     ).subscribe({
       next: chartData => {
         this.chartsRelatedError = null;
         this._dashboard.relatedProcessesChartData$.next(chartData);
       },
-      error: () => this.chartsRelatedError = 'Oops, couldn\'t get the related charts'
+      error: () => this.chartsRelatedError = 'Oops, couldn\'t get the call chains'
     });
   }
 
   private getAllProcesses(ranking: Ranking) {
-    this._jaeger.getProcesses(ranking).subscribe(processes => {
+    this._jaeger.getProcesses(ranking.value).subscribe(processes => {
       this.processes = processes;
       this._dashboard.selectedProcess$.next(processes[0]);
     })
   }
 
   private getChartsForProcess(process: Process) {
-    const obs = RANKING_METRICS.map(metric => this._jaeger.getChartData(process.key, metric));
+    const obs = RANKING_METRICS.map(metric => this._jaeger.getChartDataForProcess(process.key, metric));
     return forkJoin(obs);
   }
 
-  private getChartsForCallChain(process: Process) {
+  private getChartsForCallChain(process: Process, scope: string) {
     // @Wesley: this call should be used for the related processes
-    const obs = RANKING_METRICS.map(metric => this._jaeger.getCallChainChartData(process.key, metric));
+    const obs = RANKING_METRICS.map(metric => this._jaeger.getCallChainChartData(process.key, metric, scope));
     return forkJoin(obs);
   }
 
