@@ -31,7 +31,7 @@ fn main() {
         "Ok" => {
             tauri::Builder::default()
             .plugin(tauri_plugin_log::Builder::default().build()) // allow Tauri logging
-            .invoke_handler(tauri::generate_handler![load_stitch_data, get_process_list, get_process_data])
+            .invoke_handler(tauri::generate_handler![load_stitch_data, get_process_list, get_process_data, get_call_chain_data, get_call_chain_list])
             .run(tauri::generate_context!())
             .expect("error while running tauri application");    
         },

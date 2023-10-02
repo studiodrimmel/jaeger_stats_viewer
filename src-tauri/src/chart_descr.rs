@@ -71,7 +71,12 @@ pub struct ChartData {
 impl ChartData {
     pub fn new(cdp: ChartDataParameters, process: &str, metric: &str) -> Self {
         let lines = cdp.lines.iter().map(|line| ChartLine::new(line)).collect();
-        ChartData { title: cdp.title, metric: Some(metric.to_string()), process: Some(process.to_string()), description: Vec::new(), labels: cdp.labels, lines }
+        let description = cdp
+            .description
+            .into_iter()
+            .map(|kv|  vec![kv.0, kv.1])
+            .collect();
+        ChartData { title: cdp.title, metric: Some(metric.to_string()), process: Some(process.to_string()), description, labels: cdp.labels, lines }
     }
 }
 
@@ -96,7 +101,18 @@ pub fn get_call_chain_data(cc_key: &str, metric: &str) -> ChartData {
 
     let guard = STITCHED.lock().unwrap();
     match &*guard {
-        Some(stitched) => ChartData::new(jaeger_stats::get_call_chain_chart_data(&stitched, cc_key, metric).unwrap(),cc_key, metric),
+        Some(stitched) => {
+            match jaeger_stats::get_call_chain_chart_data(&stitched, cc_key, metric) {
+                Some(ccd) => {
+                    info!("Chart data has description {:?}", ccd.description);
+                    ChartData::new(ccd, cc_key, metric)
+                },
+                None => {
+                    error!("Failed to retrieve {cc_key}");
+                    panic!("Failed to retrieve {cc_key}");
+                }
+            }
+        },
         None => {
             error!("No stitched data loaded");
             panic!("No stitched data loaded");
