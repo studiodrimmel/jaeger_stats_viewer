@@ -9,7 +9,7 @@
     placeholder="Search related full call-chains..." [dropdown]="true" (onSelect)="changeProcess($event)"
     (completeMethod)="filterProcess($event)">
     <ng-template let-process pTemplate="item">
-        <span class="block">{{ process.name }}</span>
+        <span class="block">{{ process.display }}</span>
         <small [ngClass]="{
         'text-orange-500': process.rank >= 0.5,
         'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
@@ -21,7 +21,7 @@
 
     <!-- Selected process -->
     <ng-container *ngIf="_dashboard.selectedRelatedProcess$ | async as process">
-        <small class="block mb-4 text-500">Selected: {{ process.name }}</small>
+        <small class="block mb-4 text-500">Selected: {{ process.display }}</small>
     </ng-container>
 
     <ng-container *ngIf="{

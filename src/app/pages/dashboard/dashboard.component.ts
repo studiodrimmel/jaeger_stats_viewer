@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
     ]).pipe(
       distinctUntilChanged(),
       filter(([process, ranking]) => !!process && !!ranking),
-      switchMap(([process, ranking]) => this._jaeger.getRelatedProcesses(process.name, ranking)),
+      switchMap(([process, ranking]) => this._jaeger.getRelatedProcesses(process.display, ranking)),
     ).subscribe(relatedProcesses => {
       this.relatedProcesses = relatedProcesses;
     });
@@ -111,7 +111,14 @@ export class DashboardComponent implements OnInit {
   }
 
   private getChartsForProcess(process: Process) {
-    const obs = RANKING_METRICS.map(metric => this._jaeger.getChartData(process.name, metric));
+    const obs = RANKING_METRICS.map(metric => this._jaeger.getChartData(process.key, metric));
     return forkJoin(obs);
   }
+
+  private getChartsForCallChain(process: Process) {
+    // @Wesley: this call should be used for the related processes
+    const obs = RANKING_METRICS.map(metric => this._jaeger.getCallChainChartData(process.key, metric));
+    return forkJoin(obs);
+  }
+
 }

@@ -27,6 +27,23 @@ pub fn get_process_list(metric: Option<&str>) -> Vec<ProcessListItem> {
     }
 }
 
+#[tauri::command]
+pub fn get_call_chain_list(proc_oper: &str, metric: Option<&str>, scope: Option<&str>) -> Vec<ProcessListItem> {
+    info!("BACKEND: get_process_list({metric:?})");
+    info!("BACKEND: Working directory: '{}'", get_current_working_dir());
+    let metric = metric.unwrap_or("rate (avg)");
+    let scope = scope.unwrap_or("inbound");
+
+    let guard = STITCHED.lock().unwrap();
+    match &*guard {
+        Some(stitched) => jaeger_stats::get_call_chain_list(&stitched, proc_oper, metric, scope),
+        None => {
+            error!("Not stitched data loaded");
+            Vec::new()
+        }
+    }
+}
+
 #[derive(Serialize, Debug)]
 pub struct ChartLine {
     pub label: String,
@@ -65,6 +82,21 @@ pub fn get_process_data(proc_oper: &str, metric: &str) -> ChartData {
     let guard = STITCHED.lock().unwrap();
     match &*guard {
         Some(stitched) => ChartData::new(jaeger_stats::get_proc_oper_chart_data(&stitched, proc_oper, metric).unwrap(), proc_oper, metric),
+        None => {
+            error!("No stitched data loaded");
+            panic!("No stitched data loaded");
+        }
+    }
+}
+
+//TODO: return value should be an Optional
+#[tauri::command]
+pub fn get_call_chain_data(cc_key: &str, metric: &str) -> ChartData {
+    info!("#####   BACKEND: get_call_chain_data({cc_key}, {metric})");
+
+    let guard = STITCHED.lock().unwrap();
+    match &*guard {
+        Some(stitched) => ChartData::new(jaeger_stats::get_call_chain_chart_data(&stitched, cc_key, metric).unwrap(),cc_key, metric),
         None => {
             error!("No stitched data loaded");
             panic!("No stitched data loaded");

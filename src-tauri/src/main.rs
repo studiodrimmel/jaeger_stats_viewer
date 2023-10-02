@@ -8,7 +8,7 @@ use log::{error, info};
 mod backend;
 mod chart_descr;
 
-use chart_descr::{get_process_data, get_process_list};
+use chart_descr::{get_process_data, get_process_list, get_call_chain_data, get_call_chain_list};
 use backend::load_stitch_data;
 
 /// Check on references between spans..

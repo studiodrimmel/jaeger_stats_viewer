@@ -62,10 +62,9 @@ export class JaegerDataService {
         })
     );
   }
-
   
   getChartData(process: string, metric: string): Observable<ChartData> {
-      debug(`Calling TMP_get_process_data(${process}, ${metric})`);
+      debug(`Calling get_process_data(${process}, ${metric})`);
     //   var res = this._http.get<ChartData>('/assets/mock-data/charts_mock.json').pipe(
     //       map((chartData) => ({
     //         ...chartData,
@@ -78,21 +77,15 @@ export class JaegerDataService {
     return from(invoke<ChartData>("get_process_data", { procOper: process, metric: metric })).pipe(
       tap((chdata) => info(String(chdata)))
     );
-
-    // return from(invoke<ChartData>("tmp_get_process_data", {procOper: process, metric: metric})).pipe(
-    //   tap((chdata) => info(String(chdata))));
-//    map((chdata) => checkChartData(chdata)))
  }
 
-  // werkt!!
-//   return from(invoke<ChartLine>("tmp_get_process_data")).pipe(
-//     map((chdata) => buildChartData("TMP_title", process, metric, chdata)))
-// }
+ getCallChainChartData(ccKey: string, metric: string): Observable<ChartData> {
+  debug(`Calling get_call_chain_data(${ccKey}, ${metric})`);
+  // "inbound" is the default Scope.   The other option "end2end" still needs to be implemented (not a big issue but did not have time yet)
+  return from(invoke<ChartData>("get_call_chain_data", { ccKey: ccKey, metric: metric})).pipe(
+    tap((chdata) => info(String(chdata)))
+  );
+}
 
-  //   return from(invoke<string>("tmp_get_process_data", { proc_oper: process, metric: metric })).pipe(
-  //     map((chdata) => buildChartData(chdata, process, metric)))
-  //       // info(`received data: ${chdata} containing label = ${chdata.label} and data = [${chdata.data[0]}, ${chdata.data[1]}  ...]`);
-  //       // buildChartData(process, metric)
-  //     //));
-  // }
+
 }

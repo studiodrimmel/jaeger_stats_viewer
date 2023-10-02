@@ -53,7 +53,7 @@ export class ProcessChartsComponent implements OnInit {
 
     for (let i = 0; i < this.processes.length; i++) {
       let process = this.processes[i];
-      if (process.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+      if (process.display.toLowerCase().indexOf(query.toLowerCase()) == 0) {
         filtered.push(process);
       }
     }
