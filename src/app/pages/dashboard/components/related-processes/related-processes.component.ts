@@ -9,6 +9,7 @@ import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { SortChartsByRankingPipe } from "../../pipes/sort-charts-by-ranking.pipe";
 import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
+import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
 
 @Component({
     selector: 'app-related-processes',
@@ -21,7 +22,8 @@ import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutto
       PanelModule,
       AutoCompleteModule,
       SelectButtonModule,
-      SortChartsByRankingPipe
+      SortChartsByRankingPipe,
+      RankingPercentagePipe
     ]
 })
 export class RelatedProcessesComponent implements OnInit {
@@ -63,7 +65,7 @@ export class RelatedProcessesComponent implements OnInit {
 
     for (let i = 0; i < this.processes.length; i++) {
       let process = this.processes[i];
-      if (process.display.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+      if (process.display.toLowerCase().includes(query.toLowerCase())) {
         filtered.push(process);
       }
     }
