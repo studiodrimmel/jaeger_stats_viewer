@@ -49,6 +49,22 @@ export class JaegerDataService {
     );
   }
 
+  getCallChains(procOper: string, ranking: Ranking, scope: string): Observable<Process[]> {
+    // return this._http.get<Process[]>('/assets/mock-data/proces_list_mock.json').pipe(
+    //   map((processes: Process[]) => processes.sort((a, b) => 
+    //     a.rank < b.rank ? 1 : (a.rank === b.rank ? 0 : -1)
+    //   ))
+    // )
+    debug(`Calling get_call_chain_list(${procOper}, ${ranking.value}, ${scope})`);
+    return from(invoke<Process[]>('get_call_chain_list', {procOper: procOper, metric: ranking.value, scope: scope})).pipe(
+        tap((graphs) => {
+          info(`Returned from RUST: process_list with: lenght ${graphs.length}`);
+        })
+    );
+  }
+
+
+
   getRelatedProcesses(processName: string, ranking: Ranking): Observable<Process[]> {
     // return this._http.get<Process[]>('/assets/mock-data/proces_list_mock.json').pipe(
     //   map((processes: Process[]) => processes.sort((a, b) => 
