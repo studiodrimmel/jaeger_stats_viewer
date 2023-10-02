@@ -3,39 +3,46 @@
         <h2 class="font-medium mb-2">Process/operation</h2>
     </header>
 
-    <p-autoComplete 
-        [(ngModel)]="selectedProcess" 
-        [autoHighlight]="true" 
-        [dropdown]="true" 
-        field="name"
-        [forceSelection]="true"
-        placeholder="Search process..." 
-        styleClass="mb-2" 
-        [style]="{
-            width: '100%'
-        }" 
-        [suggestions]="filteredProcesses" 
-        (onSelect)="changeProcess($event)"
-        (completeMethod)="filterProcess($event)"
-    >
-        <ng-template let-process pTemplate="item">
-            <span class="block">{{ process.display }}</span>
-            <small [ngClass]="{
-            'text-orange-500': process.rank >= 0.5,
-            'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
-            'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
-            'text-indigo-500': process.rank < 0.1,
-        }">{{ process.rank }}</small>
-        </ng-template>
-    </p-autoComplete>
+    <div class="flex gap-2">
+        <p-autoComplete 
+            [(ngModel)]="selectedProcess" 
+            [autoHighlight]="true" 
+            [dropdown]="true" 
+            field="display"
+            [forceSelection]="true"
+            placeholder="Search process..." 
+            styleClass="mb-2" 
+            [style]="{
+                width: '100%'
+            }" 
+            [suggestions]="filteredProcesses" 
+            (onSelect)="changeProcess($event)"
+            (completeMethod)="filterProcess($event)"
+        >
+            <ng-template let-process pTemplate="item">
+                <span class="block">{{ process.display }}</span>
+                <small [ngClass]="{
+                'text-orange-500': process.rank >= 0.5,
+                'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
+                'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
+                'text-indigo-500': process.rank < 0.1,
+            }">{{ process.rank }}</small>
+            </ng-template>
+        </p-autoComplete>
+    </div>
 
     <!-- Selected process -->
     <ng-container *ngIf="_dashboard.selectedProcess$ | async as process">
         <small class="block mb-4 text-500">Selected: {{ process.display }}</small>
     </ng-container>
 
-    <p-panel *ngFor="let chart of charts$ | async" [header]="_dashboard.getChartPanelHeader(chart.metric)" [toggleable]="true"
-        toggler="header" styleClass="mb-3">
+    <p-panel 
+        *ngFor="let chart of (charts$ | async)! | sortChartsByRanking:(_dashboard.selectedRanking$ | async)!" 
+        [header]="_dashboard.getChartPanelHeader(chart.metric)" 
+        [toggleable]="true"
+        toggler="header" 
+        styleClass="mb-3"
+    >
         <p-chart type="line" [data]="chart.data" [width]="'100%'" [height]="'275px'"></p-chart>
 
         <div
