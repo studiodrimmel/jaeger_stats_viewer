@@ -1466,7 +1466,7 @@ checksum = "af150ab688ff2122fcef229be89cb50dd66af9e01a4ff320cc137eecc9bacc38"
 [[package]]
 name = "jaeger_stats"
 version = "0.2.2"
-source = "git+https://github.com/cvkem/jaeger_stats?branch=main#3b89af6830c67dc7e99de5a2e683786f4a33e609"
+source = "git+https://github.com/cvkem/jaeger_stats?branch=main#c85b5e93d3a55a3bbf9e62f0432250014d5f6a98"
 dependencies = [
  "bincode",
  "chrono",
@@ -2848,9 +2848,9 @@ checksum = "9d0e916b1148c8e263850e1ebcbd046f333e0683c724876bb0da63ea4373dc8a"
 
 [[package]]
 name = "tauri"
-version = "1.5.0"
+version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72aee3277d0a0df01472cc704ab5934a51a1f25348838df17bfb3c5cb727880c"
+checksum = "0238c5063bf9613054149a1b6bce4935922e532b7d8211f36989a490a79806be"
 dependencies = [
  "anyhow",
  "cocoa",
