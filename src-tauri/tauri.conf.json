@@ -1,7 +1,7 @@
 {
   "build": {
-    "beforeDevCommand": "pnpm start --port 1420",
-    "beforeBuildCommand": "pnpm build",
+    "beforeDevCommand": "npm start --port 1420",
+    "beforeBuildCommand": "npm build",
     "devPath": "http://localhost:1420",
     "distDir": "../dist/jaeger_stats_viewer",
     "withGlobalTauri": false
