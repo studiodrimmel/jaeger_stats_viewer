@@ -105,11 +105,4 @@ export class RelatedProcessesComponent implements OnInit {
 
     this.filteredRelatedProcesses = filtered;
   }
-
-  getOptions(chartData: ChartData) {
-    console.log(chartData);
-    return {
-
-    }
-  }
 }
