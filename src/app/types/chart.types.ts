@@ -11,3 +11,9 @@ export interface ChartData {
     labels: String[];
     lines: ChartLine[]
 }
+
+export interface MetricChartYAxis {
+    metric: string;
+    min: number;
+    max: number;
+}

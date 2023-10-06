@@ -57,7 +57,13 @@
 <ng-template #relatedCharts let-charts="charts">
     <p-panel *ngFor="let chart of charts" [header]="_dashboard.getChartPanelHeader(chart.metric)" [toggleable]="true"
         toggler="header" styleClass="mb-3">
-        <p-chart type="line" [data]="chart.data" [width]="'100%'" [height]="'275px'"></p-chart>
+        <p-chart 
+            type="line" 
+            [data]="chart.data" 
+            [width]="'100%'" 
+            [height]="'275px'"
+            [options]="chart.options ?? {}"
+        ></p-chart>
 
         <div *ngIf="chart.description?.length"
             class="border-round border-1 border-solid border-gray-300 pt-2 px-3 mt-3">
