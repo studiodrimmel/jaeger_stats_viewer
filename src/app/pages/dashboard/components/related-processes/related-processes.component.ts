@@ -4,12 +4,13 @@ import { Process } from 'src/app/types';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { DashboardService } from '../../dashboard.service';
-import { map, Observable } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, map, Observable, tap } from 'rxjs';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { SortChartsByRankingPipe } from "../../pipes/sort-charts-by-ranking.pipe";
 import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
 import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
+import { ChartData } from 'chart.js';
 
 @Component({
     selector: 'app-related-processes',
@@ -46,9 +47,41 @@ export class RelatedProcessesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.charts$ = this._dashboard.relatedProcessesChartData$.pipe(
-      map(chartData => chartData.map(data => this._dashboard.buildChartDatasetFromChartData(data)))
-    );
+    this.charts$ = combineLatest([
+      this._dashboard.relatedProcessesChartData$.pipe(
+        map(chartData => chartData.map(data => this._dashboard.buildChartDatasetFromChartData(data)))
+      ),
+      this._dashboard.processesYAxisValues$,
+      this._dashboard.equalAxis$
+    ]).pipe(
+      distinctUntilChanged(),
+      map(([chartData, yAxis, equalAxis]) => {
+        if (!chartData?.length) {
+          return [];
+        }
+
+        return chartData.map(cD => {
+          const processYAxis = yAxis.find(yA => yA.metric === cD.metric)
+        
+          if (!processYAxis || !equalAxis) {
+            return cD;
+          }
+          
+          return {
+            ...cD,
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: processYAxis.min < 0 ? false : true,
+                  max: processYAxis.max,
+                  min: processYAxis.min < 0 ? processYAxis.min : undefined
+                }
+              }
+            }
+          }
+        })
+      })
+    )
   }
 
   changeScope(event: SelectButtonChangeEvent) {

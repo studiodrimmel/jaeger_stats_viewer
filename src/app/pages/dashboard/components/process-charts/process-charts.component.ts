@@ -4,7 +4,7 @@ import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { DashboardService } from '../../dashboard.service';
 import { Process } from 'src/app/types';
-import { map, Observable } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { SortChartsByRankingPipe } from '../../pipes/sort-charts-by-ranking.pipe';
@@ -41,9 +41,36 @@ export class ProcessChartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.charts$ = this._dashboard.chartData$.pipe(
-      map(chartData => chartData.map(data => this._dashboard.buildChartDatasetFromChartData(data)))
-    );
+    this.charts$ = combineLatest([
+      this._dashboard.chartData$.pipe(
+        map(chartData => chartData.map(data => this._dashboard.buildChartDatasetFromChartData(data)))
+      ),
+      this._dashboard.equalAxis$
+    ]).pipe(
+      distinctUntilChanged(),
+      map(([chartData, equalAxis]) => {
+        if (!chartData?.length) {
+          return [];
+        }
+
+        return chartData.map(cD => {
+          if (!equalAxis) {
+            return cD;
+          }
+          
+          return {
+            ...cD,
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          }
+        })
+      })
+    )
   }
 
   changeProcess(process: Process) {
@@ -62,5 +89,18 @@ export class ProcessChartsComponent implements OnInit {
     }
 
     this.filteredProcesses = filtered;
+  }
+
+  processChartPlugin(metric: string) {
+    return {
+      afterDatasetDraw: (chart: any, args: any, options: any) => {
+        const { max, min } = chart.scales.y;
+        this._dashboard.updateProcessesYAxisValues({
+          min, 
+          max,
+          metric
+        });
+      }
+    }
   }
 }

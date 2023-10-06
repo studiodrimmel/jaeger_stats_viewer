@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -17,7 +18,7 @@ import { Ranking } from 'src/app/types';
     AutoCompleteModule,
     FormsModule,
     SelectButtonModule,
-
+    ToggleButtonModule
   ],
   templateUrl: './dashboard-filterbar.component.html'
 })
@@ -25,6 +26,10 @@ export class DashboardFilterbarComponent {
   // Rankings
   selectedRanking: Ranking;
   rankingOptions = RANKING_OPTIONS;
+
+  // Equalize
+  isEqualized = false;
+  stateOptions: any[] = [{label: 'original y-axes', value: false}, {label: 'equal y-axes', value: true}];
 
   constructor(
     public _dashboard: DashboardService
@@ -34,5 +39,9 @@ export class DashboardFilterbarComponent {
 
   changeRanking(ranking: Ranking) {
     this._dashboard.selectedRanking$.next(ranking);
+  }
+
+  changeEqualizer(isEqual: boolean) {
+    this._dashboard.equalAxis$.next(isEqual);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { ChartData, Process, Ranking } from '../../types';
+import { ChartData, MetricChartYAxis, Process, Ranking } from '../../types';
 import { DEFAULT_SCOPE, RANKING_OPTIONS } from './dashboard.constants';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class DashboardService {
   selectedRelatedProcess$ = new Subject<Process | null>();
   relatedProcessesChartData$ = new Subject<ChartData[]>();
   scope$ = new BehaviorSubject<'inbound' | 'end2end'>(DEFAULT_SCOPE);
+
+  // yAxis
+  equalAxis$ = new BehaviorSubject(false);
+  processesYAxisValues$ = new BehaviorSubject<MetricChartYAxis[]>([]);
 
   getChartPanelHeader(metric: string) {
     return RANKING_OPTIONS.find(opt => opt.value === metric)?.label;
@@ -43,6 +47,19 @@ export class DashboardService {
           fill: false
         }))
       }
+    }
+  }
+
+  updateProcessesYAxisValues(value: MetricChartYAxis) {
+    const currentValues = this.processesYAxisValues$.getValue();
+    const metric = currentValues.find(v => v.metric === value.metric);
+
+    if (!metric) {
+      this.processesYAxisValues$.next(currentValues.concat([value]));
+    } else {
+      this.processesYAxisValues$.next(
+        currentValues.map(v => v.metric === value.metric ? value : v)
+      );
     }
   }
 }
