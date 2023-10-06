@@ -9,8 +9,8 @@
 
 <app-dashboard-filterbar></app-dashboard-filterbar>
 
-<div class="grid mt-0 gap-5">
-    <div class="col">
+<div class="grid mt-0">
+    <div class="col-12 md:col-6">
         <ng-container *ngIf="!chartsError; else chartErrorMessage">
             <app-process-charts 
                 [processes]="processes"
@@ -20,7 +20,7 @@
             <p>{{ chartsError }}</p>
         </ng-template>
     </div>
-    <div class="col">
+    <div class="col-12 md:col-6">
         <app-related-processes
             [processes]="relatedProcesses"
         ></app-related-processes>
