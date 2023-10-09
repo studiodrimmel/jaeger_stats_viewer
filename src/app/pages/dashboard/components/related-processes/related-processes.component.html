@@ -21,6 +21,7 @@
         >
             <ng-template let-process pTemplate="item">
                 <span class="block">{{ process.display }}</span>
+                <small>id={{process.idx}}, avg.cnt={{ process.avgCount }}, </small>
                 <small 
                     [ngClass]="{
                         'text-orange-500': process.rank >= 0.5,
@@ -29,8 +30,9 @@
                         'text-indigo-500': process.rank < 0.1,
                     }"
                 >
-                    {{ process.rank | rankingPercentage }}
+                 growth={{ process.rank | rankingPercentage }}
                 </small>
+                <small>, type={{ process.chainType }}, inbound-id={{ process.inboundIdx }}</small>
             </ng-template>
         </p-autoComplete>
 

@@ -7,8 +7,10 @@ use log::{error, info};
 
 mod backend;
 mod chart_descr;
+mod file_descr;
 
 use chart_descr::{get_process_data, get_process_list, get_call_chain_data, get_call_chain_list};
+use file_descr::get_file_stats;
 use backend::load_stitch_data;
 
 /// Check on references between spans..
@@ -31,7 +33,7 @@ fn main() {
         "Ok" => {
             tauri::Builder::default()
             .plugin(tauri_plugin_log::Builder::default().build()) // allow Tauri logging
-            .invoke_handler(tauri::generate_handler![load_stitch_data, get_process_list, get_process_data, get_call_chain_data, get_call_chain_list])
+            .invoke_handler(tauri::generate_handler![load_stitch_data, get_process_list, get_process_data, get_call_chain_data, get_call_chain_list, get_file_stats])
             .run(tauri::generate_context!())
             .expect("error while running tauri application");    
         },
