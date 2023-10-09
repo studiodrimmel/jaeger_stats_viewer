@@ -20,6 +20,7 @@
     >
         <ng-template let-process pTemplate="item">
             <span class="block">{{ process.display }}</span>
+            <small>id={{process.idx}}, avg.cnt={{ process.avgCount }}, </small>
             <small [ngClass]="{
             'text-orange-500': process.rank >= 0.5,
             'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
