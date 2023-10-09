@@ -30,6 +30,8 @@ export class JaegerDataService {
     })).pipe(
       tap((graphs) => {
         info(`Returned from RUST: process_list with: lenght ${graphs.length}`);
+        debug(`   first item has chainType ${graphs[0].chainType}`);
+        debug(`   first item has inboundIdx ${graphs[0].inboundIdx}`);
       })
     );
   }
