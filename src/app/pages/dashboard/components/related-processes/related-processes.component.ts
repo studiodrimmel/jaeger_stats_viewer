@@ -11,6 +11,8 @@ import { SortChartsByRankingPipe } from "../../pipes/sort-charts-by-ranking.pipe
 import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
 import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
 import { ChipModule } from 'primeng/chip';
+import { DropdownModule } from 'primeng/dropdown';
+
 
 @Component({
     selector: 'app-related-processes',
@@ -23,6 +25,7 @@ import { ChipModule } from 'primeng/chip';
       ChipModule,
       PanelModule,
       AutoCompleteModule,
+      DropdownModule,
       SelectButtonModule,
       SortChartsByRankingPipe,
       RankingPercentagePipe

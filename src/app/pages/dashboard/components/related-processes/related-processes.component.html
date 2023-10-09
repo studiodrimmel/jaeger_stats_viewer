@@ -4,8 +4,7 @@
     </header>
 
     <div class="flex gap-2">
-        <p-selectButton [(ngModel)]="selectedScope" [options]="scopes"
-        (onChange)="changeScope($event)"></p-selectButton>
+        <p-dropdown [options]="scopes" [(ngModel)]="selectedScope"(onChange)="changeScope($event)"></p-dropdown>
 
         <p-autoComplete 
             class="flex-grow-1" 
