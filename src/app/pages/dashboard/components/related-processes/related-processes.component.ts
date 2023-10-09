@@ -4,13 +4,13 @@ import { Process } from 'src/app/types';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { DashboardService } from '../../dashboard.service';
-import { combineLatest, distinctUntilChanged, filter, map, Observable, tap } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { SortChartsByRankingPipe } from "../../pipes/sort-charts-by-ranking.pipe";
 import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
 import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
-import { ChartData } from 'chart.js';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
     selector: 'app-related-processes',
@@ -20,6 +20,7 @@ import { ChartData } from 'chart.js';
       CommonModule,
       FormsModule,
       ChartModule,
+      ChipModule,
       PanelModule,
       AutoCompleteModule,
       SelectButtonModule,
@@ -30,7 +31,7 @@ import { ChartData } from 'chart.js';
 export class RelatedProcessesComponent implements OnInit {
   @Input() processes: Process[]
 
-  charts$: Observable<any>
+  charts$: Observable<any[]>
 
   // Processes
   selectedRelatedProcess: Process | null;
@@ -85,10 +86,13 @@ export class RelatedProcessesComponent implements OnInit {
   }
 
   changeScope(event: SelectButtonChangeEvent) {
+    this._dashboard.relatedProcessesChartData$.next([]);
+    this._dashboard.selectedRelatedProcess$.next(null);
     this._dashboard.scope$.next(event.value);
   }
-
+  
   changeProcess(process: Process) {
+    console.log(process);
     this._dashboard.selectedRelatedProcess$.next(process);
   }
 

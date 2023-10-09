@@ -1,19 +1,14 @@
 <div class="card gap-4 mt-4 mb-4 flex">
     <div>
         <h2 class="font-medium mb-2">Ranking</h2>
-        <small class="block mb-4 text-500">Fetch the processes and call-chains based on a ranking.</small>
-        <p-selectButton [(ngModel)]="selectedRanking" [options]="rankingOptions" optionLabel="label"
-            (onChange)="changeRanking($event.value)"></p-selectButton>
+        <p-dropdown [options]="rankingOptions" [(ngModel)]="selectedRanking" optionLabel="label" (onChange)="changeRanking($event.value)"></p-dropdown>
     </div>
     <div>
         <h2 class="font-medium mb-2">Equalize</h2>
-        <small class="block mb-4 text-500">Make the left and right chart have equal y-axes based on the process/operation.</small>
-        <p-selectButton 
-            [options]="stateOptions" 
-            [(ngModel)]="isEqualized" 
-            optionLabel="label" 
-            optionValue="value"
-            (onChange)="changeEqualizer($event.value)"
-        />
+        <p-dropdown [options]="stateOptions" [(ngModel)]="isEqualized" optionLabel="label" optionValue="value" (onChange)="changeEqualizer($event.value)"></p-dropdown>
+    </div>
+    <div>
+        <h2 class="font-medium mb-2">Avg. count</h2>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="avgCount" [size]="6" (onInput)="changeAvgCount(+$event.value)" />
     </div>
 </div>

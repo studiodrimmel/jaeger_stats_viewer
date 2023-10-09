@@ -1,9 +1,8 @@
 <app-page-header [pageName]="pageName" [breadcrumb]="breadcrumb">
     <app-dashboard-header-metrics
         metrics
-        [users]="3322"
-        [sessions]="4591"
-        [duration]="2.32"
+        [numberOfProcesses]="filteredProcesses.length"
+        [numberOfRelatedProcesses]="relatedProcesses.length"
     ></app-dashboard-header-metrics>
 </app-page-header>
 
@@ -13,7 +12,7 @@
     <div class="col-12 md:col-6">
         <ng-container *ngIf="!chartsError; else chartErrorMessage">
             <app-process-charts 
-                [processes]="processes"
+                [processes]="filteredProcesses"
             ></app-process-charts>
         </ng-container>
         <ng-template #chartErrorMessage>

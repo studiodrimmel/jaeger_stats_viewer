@@ -4,13 +4,15 @@
     </header>
 
     <div class="flex gap-2">
+        <p-selectButton [(ngModel)]="selectedScope" [options]="scopes"
+        (onChange)="changeScope($event)"></p-selectButton>
+
         <p-autoComplete 
             class="flex-grow-1" 
-            styleClass="mb-2 flex-grow-1" 
+            styleClass="mb-1 flex-grow-1" 
             [style]="{
                 width: '100%',
             }" 
-            [autoHighlight]="true"
             [(ngModel)]="selectedRelatedProcess" 
             [suggestions]="filteredRelatedProcesses"
             field="display" 
@@ -21,30 +23,46 @@
         >
             <ng-template let-process pTemplate="item">
                 <span class="block">{{ process.display }}</span>
-                <small>id={{process.idx}}, avg.cnt={{ process.avgCount }}, </small>
-                <small 
-                    [ngClass]="{
-                        'text-orange-500': process.rank >= 0.5,
-                        'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
-                        'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
-                        'text-indigo-500': process.rank < 0.1,
-                    }"
-                >
-                 growth={{ process.rank | rankingPercentage }}
-                </small>
-                <small>, type={{ process.chainType }}, inbound-id={{ process.inboundIdx }}</small>
+
+                <div class="card flex align-items-center gap-2 flex-wrap mt-2">
+                    <p-chip>
+                        <small class="p-1">Id {{process.idx}}</small>
+                    </p-chip>
+                    <p-chip>
+                        <small class="p-1">Avg. count {{ process.avgCount }}</small>
+                    </p-chip>
+                    <p-chip>
+                        <small class="p-1">Growth {{ process.rank | rankingPercentage }}</small>
+                    </p-chip>
+                    <p-chip>
+                        <small class="p-1">{{ process.chainType }}</small>
+                    </p-chip>
+                    <p-chip *ngIf="selectedScope === 'end2end'">
+                        <small class="p-1">Inbound-id {{ process.inboundIdx }}</small>
+                    </p-chip>
+                </div>
             </ng-template>
         </p-autoComplete>
-
-        <p-selectButton [(ngModel)]="selectedScope" [options]="scopes"
-            (onChange)="changeScope($event)"></p-selectButton>
-
     </div>
 
     <!-- Selected process -->
-    <ng-container *ngIf="_dashboard.selectedRelatedProcess$ | async as process">
-        <small class="block mb-4 text-500">Selected: {{ process.display }}</small>
-    </ng-container>
+    <div class="card flex align-items-center gap-2 flex-wrap mb-3 mt-2" *ngIf="_dashboard.selectedRelatedProcess$ | async as process">
+        <p-chip>
+            <small class="p-1">Id {{process.idx}}</small>
+        </p-chip>
+        <p-chip>
+            <small class="p-1">Avg. count {{ process.avgCount }}</small>
+        </p-chip>
+        <p-chip>
+            <small class="p-1">Growth {{ process.rank | rankingPercentage }}</small>
+        </p-chip>
+        <p-chip>
+            <small class="p-1">{{ process.chainType }}</small>
+        </p-chip>
+        <p-chip *ngIf="selectedScope === 'end2end'">
+            <small class="p-1">Inbound-id {{ process.inboundIdx }}</small>
+        </p-chip>
+    </div>
 
     <ng-container *ngIf="{
         charts: (charts$ | async)! | sortChartsByRanking:(_dashboard.selectedRanking$ | async)!
@@ -82,5 +100,5 @@
 </ng-template>
 
 <ng-template #noRelatedProcessSelected>
-    <p class="text-600">No related processes yet</p>
+    <p class="text-600">Select a related call-chain</p>
 </ng-template>
