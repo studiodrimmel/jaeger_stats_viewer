@@ -14,7 +14,7 @@ import { RANKING_METRICS, RANKING_OPTIONS } from './dashboard.constants';
 import { DashboardFilterbarComponent } from "./components/dashboard-filterbar/dashboard-filterbar.component";
 import { DashboardService } from './dashboard.service';
 import { Ranking } from 'src/app/types';
-import { combineLatest, distinctUntilChanged, filter, forkJoin, skip, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, forkJoin, of, skip, switchMap, tap } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
 
@@ -35,15 +35,17 @@ import { RelatedProcessesComponent } from "./components/related-processes/relate
     ]
 })
 export class DashboardComponent implements OnInit {
-  pageName = 'Dashboard'
+  pageName = 'Process Info'
   breadcrumb: MenuItem[];
 
   // Ranking
   selectedRanking = RANKING_OPTIONS[0];
 
   // Processes
-  processes: Process[] = [];
+  processes$ = new BehaviorSubject<Process[]>([]);
   relatedProcesses: Process[] = [];
+
+  filteredProcesses: Process[] = [];
 
   // Charts
   chartsError: string | null = null;
@@ -105,11 +107,18 @@ export class DashboardComponent implements OnInit {
       },
       error: () => this.chartsRelatedError = 'Oops, couldn\'t get the call chains'
     });
+
+    combineLatest([
+      this._dashboard.minimumAvgCount$,
+      this.processes$
+    ]).subscribe(([min, processes]) => {
+      this.filteredProcesses = processes.filter(p => p.avgCount >= min)
+    });
   }
 
   private getAllProcesses(ranking: Ranking) {
     this._jaeger.getProcesses(ranking.value).subscribe(processes => {
-      this.processes = processes;
+      this.processes$.next(processes);
       this._dashboard.selectedProcess$.next(processes[0]);
     })
   }

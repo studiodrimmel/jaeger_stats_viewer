@@ -15,13 +15,16 @@ export class DashboardService {
   chartData$ = new Subject<ChartData[]>();
 
   // Related processes (right side)
-  selectedRelatedProcess$ = new Subject<Process | null>();
+  selectedRelatedProcess$ = new BehaviorSubject<Process | null>(null);
   relatedProcessesChartData$ = new Subject<ChartData[]>();
   scope$ = new BehaviorSubject<'inbound' | 'end2end'>(DEFAULT_SCOPE);
 
   // yAxis
   equalAxis$ = new BehaviorSubject(false);
   processesYAxisValues$ = new BehaviorSubject<MetricChartYAxis[]>([]);
+
+  // AvgCount filter
+  minimumAvgCount$ = new BehaviorSubject<number>(0);
 
   getChartPanelHeader(metric: string) {
     return RANKING_OPTIONS.find(opt => opt.value === metric)?.label;

@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard-header-metrics.component.html'
 })
 export class DashboardHeaderMetricsComponent {
-  @Input() users: number;
-  @Input() sessions: number;
-  @Input() duration: number;
+  @Input() numberOfProcesses: number;
+  @Input() numberOfRelatedProcesses: number;
 }

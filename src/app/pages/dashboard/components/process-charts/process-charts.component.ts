@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
+import { ChipModule } from 'primeng/chip';
 import { DashboardService } from '../../dashboard.service';
 import { Process } from 'src/app/types';
 import { combineLatest, distinctUntilChanged, map, Observable } from 'rxjs';
@@ -18,6 +19,7 @@ import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
     ChartModule,
     PanelModule,
     AutoCompleteModule,
+    ChipModule,
     FormsModule,
     SortChartsByRankingPipe,
     RankingPercentagePipe

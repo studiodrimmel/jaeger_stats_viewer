@@ -10,7 +10,7 @@
         field="display"
         [forceSelection]="true"
         placeholder="Search process..." 
-        styleClass="mb-2" 
+        styleClass="mb-1" 
         [style]="{
             width: '100%'
         }" 
@@ -20,20 +20,32 @@
     >
         <ng-template let-process pTemplate="item">
             <span class="block">{{ process.display }}</span>
-            <small>id={{process.idx}}, avg.cnt={{ process.avgCount }}, </small>
-            <small [ngClass]="{
-            'text-orange-500': process.rank >= 0.5,
-            'text-cyan-500': process.rank < 0.5 && process.rank >= 0.25,
-            'text-green-500': process.rank < 0.25 && process.rank >= 0.1,
-            'text-indigo-500': process.rank < 0.1,
-        }">{{ process.rank | rankingPercentage }}</small>
+            <div class="card flex align-items-center gap-2 flex-wrap mt-2">
+                <p-chip>
+                    <small class="p-1">Id {{process.idx}}</small>
+                </p-chip>
+                <p-chip>
+                    <small class="p-1">Avg. count {{ process.avgCount }}</small>
+                </p-chip>
+                <p-chip>
+                    <small class="p-1">Growth {{ process.rank | rankingPercentage }}</small>
+                </p-chip>
+            </div>
         </ng-template>
     </p-autoComplete>
 
     <!-- Selected process -->
-    <ng-container *ngIf="_dashboard.selectedProcess$ | async as process">
-        <small class="block mb-4 text-500">Selected: {{ process.display }}</small>
-    </ng-container>
+    <div class="card flex align-items-center gap-2 flex-wrap mb-3 mt-2" *ngIf="_dashboard.selectedProcess$ | async as process">
+        <p-chip>
+            <small class="p-1">Id {{process.idx}}</small>
+        </p-chip>
+        <p-chip>
+            <small class="p-1">Avg. count {{ process.avgCount }}</small>
+        </p-chip>
+        <p-chip>
+            <small class="p-1">Growth {{ process.rank | rankingPercentage }}</small>
+        </p-chip>
+    </div>
 
     <p-panel 
         *ngFor="let chart of (charts$ | async)! | sortChartsByRanking:(_dashboard.selectedRanking$ | async)!" 
