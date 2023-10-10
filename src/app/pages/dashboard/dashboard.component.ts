@@ -43,9 +43,10 @@ export class DashboardComponent implements OnInit {
 
   // Processes
   processes$ = new BehaviorSubject<Process[]>([]);
-  relatedProcesses: Process[] = [];
+  relatedProcessesses$ = new BehaviorSubject<Process[]>([]);
 
   filteredProcesses: Process[] = [];
+  filteredRelatedProcesses: Process[] = [];
 
   // Charts
   chartsError: string | null = null;
@@ -89,7 +90,7 @@ export class DashboardComponent implements OnInit {
       filter(([process, ranking]) => !!process && !!ranking),
       switchMap(([process, ranking, scope]) => this._jaeger.getCallChains(process.key, ranking.value, scope)),
     ).subscribe(relatedProcesses => {
-      this.relatedProcesses = relatedProcesses;
+      this.relatedProcessesses$.next(relatedProcesses);
     });
 
     // Get charts for the related process
@@ -114,6 +115,13 @@ export class DashboardComponent implements OnInit {
     ]).subscribe(([min, processes]) => {
       this.filteredProcesses = processes.filter(p => p.avgCount >= min)
     });
+
+    combineLatest([
+      this._dashboard.minimumAvgCountCallChain$,
+      this.relatedProcessesses$
+    ]).subscribe(([min, processes]) => {
+      this.filteredRelatedProcesses = processes.filter(p => p.avgCount >= min)
+    });
   }
 
   private getAllProcesses(ranking: Ranking) {
@@ -129,7 +137,6 @@ export class DashboardComponent implements OnInit {
   }
 
   private getChartsForCallChain(process: Process, scope: string) {
-    // @Wesley: this call should be used for the related processes
     const obs = RANKING_METRICS.map(metric => this._jaeger.getCallChainChartData(process.key, metric, scope));
     return forkJoin(obs);
   }

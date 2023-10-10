@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { DropdownModule } from 'primeng/dropdown';
-import { InputNumberModule } from 'primeng/inputnumber';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -22,7 +21,6 @@ import { Ranking } from 'src/app/types';
     FormsModule,
     SelectButtonModule,
     ToggleButtonModule,
-    InputNumberModule
   ],
   templateUrl: './dashboard-filterbar.component.html'
 })
@@ -35,8 +33,6 @@ export class DashboardFilterbarComponent {
   isEqualized = false;
   stateOptions: any[] = [{label: 'original y-axes', value: false}, {label: 'equal y-axes', value: true}];
 
-  // Avg count
-  avgCount: number = 0;
 
   constructor(
     public _dashboard: DashboardService
@@ -50,9 +46,5 @@ export class DashboardFilterbarComponent {
 
   changeEqualizer(isEqual: boolean) {
     this._dashboard.equalAxis$.next(isEqual);
-  }
-
-  changeAvgCount(count: number) {
-    this._dashboard.minimumAvgCount$.next(count);
   }
 }
