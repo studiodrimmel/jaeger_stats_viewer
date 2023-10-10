@@ -11,8 +11,8 @@ export class DashboardService {
   selectedRanking$ = new BehaviorSubject<Ranking>(RANKING_OPTIONS[0]);
   
   // Processes (left side)
-  selectedProcess$ = new Subject<Process>();
-  chartData$ = new Subject<ChartData[]>();
+  selectedProcess$ = new BehaviorSubject<Process | null>(null);
+  chartData$ = new BehaviorSubject<ChartData[]>([]);
 
   // Related processes (right side)
   selectedRelatedProcess$ = new BehaviorSubject<Process | null>(null);

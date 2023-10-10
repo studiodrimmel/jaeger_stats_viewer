@@ -38,7 +38,6 @@ export class ProcessChartsComponent implements OnInit {
   selectedProcess: Process;
   filteredProcesses: Process[] = [];
 
-
   // Avg count
   avgCount: number = 0;
 
@@ -46,7 +45,11 @@ export class ProcessChartsComponent implements OnInit {
     public _dashboard: DashboardService
   ) {
     this._dashboard.minimumAvgCount$.subscribe(count => this.avgCount = count);
-    this._dashboard.selectedProcess$.subscribe(process => this.selectedProcess = process);
+    this._dashboard.selectedProcess$.subscribe(process => {
+      if (process) {
+        this.selectedProcess = process
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -61,8 +64,6 @@ export class ProcessChartsComponent implements OnInit {
         if (!chartData?.length) {
           return [];
         }
-
-        console.log(chartData)
 
         return chartData.map(cD => {
           if (!equalAxis) {
