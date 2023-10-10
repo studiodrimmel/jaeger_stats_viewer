@@ -25,6 +25,7 @@ export class DashboardService {
 
   // AvgCount filter
   minimumAvgCount$ = new BehaviorSubject<number>(0);
+  minimumAvgCountCallChain$ = new BehaviorSubject<number>(0);
 
   getChartPanelHeader(metric: string) {
     return RANKING_OPTIONS.find(opt => opt.value === metric)?.label;

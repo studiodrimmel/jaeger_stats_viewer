@@ -2,7 +2,7 @@
     <app-dashboard-header-metrics
         metrics
         [numberOfProcesses]="filteredProcesses.length"
-        [numberOfRelatedProcesses]="relatedProcesses.length"
+        [numberOfRelatedProcesses]="filteredRelatedProcesses.length"
     ></app-dashboard-header-metrics>
 </app-page-header>
 
@@ -21,7 +21,7 @@
     </div>
     <div class="col-12 md:col-6">
         <app-related-processes
-            [processes]="relatedProcesses"
+            [processes]="filteredRelatedProcesses"
         ></app-related-processes>
     </div>
 </div>

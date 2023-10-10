@@ -1,8 +1,8 @@
-<div class="mb-3">
+<div class="mb-4">
     <p-breadcrumb class="max-w-full" [model]="breadcrumb" [home]="home"></p-breadcrumb>
 </div>
 
-<div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row mb-3">
+<div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row mb-4">
     <div>
         <div class="font-medium text-3xl text-900">{{pageName}}</div>
         <ng-content select="[metrics]"></ng-content>
@@ -10,8 +10,5 @@
     <!-- Actie knoppen? -->
     <div class="mt-3 lg:mt-0">
         <ng-content select="[actions]"></ng-content>
-<!--            Example-->
-<!--            <button pButton pRipple label="Add" class="p-button-outlined mr-2" icon="pi pi-user-plus"></button>-->
-<!--            <button pButton pRipple label="Save" icon="pi pi-check"></button>-->
     </div>
 </div>

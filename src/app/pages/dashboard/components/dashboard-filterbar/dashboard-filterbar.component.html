@@ -1,14 +1,10 @@
-<div class="card gap-4 mt-4 mb-4 flex">
+<div class="card gap-4 flex">
     <div>
-        <h2 class="font-medium mb-2">Ranking</h2>
+        <h4 class="font-medium mt-0 mb-2">Ranking</h4>
         <p-dropdown [options]="rankingOptions" [(ngModel)]="selectedRanking" optionLabel="label" (onChange)="changeRanking($event.value)"></p-dropdown>
     </div>
     <div>
-        <h2 class="font-medium mb-2">Equalize</h2>
+        <h4 class="font-medium mt-0 mb-2">Equalize</h4>
         <p-dropdown [options]="stateOptions" [(ngModel)]="isEqualized" optionLabel="label" optionValue="value" (onChange)="changeEqualizer($event.value)"></p-dropdown>
-    </div>
-    <div>
-        <h2 class="font-medium mb-2">Avg. count</h2>
-        <p-inputNumber inputId="integeronly" [(ngModel)]="avgCount" [size]="6" (onInput)="changeAvgCount(+$event.value)" />
     </div>
 </div>

@@ -12,6 +12,7 @@ import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutto
 import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
 import { ChipModule } from 'primeng/chip';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 @Component({
@@ -28,7 +29,8 @@ import { DropdownModule } from 'primeng/dropdown';
       DropdownModule,
       SelectButtonModule,
       SortChartsByRankingPipe,
-      RankingPercentagePipe
+      RankingPercentagePipe,
+      InputNumberModule
     ]
 })
 export class RelatedProcessesComponent implements OnInit {
@@ -44,9 +46,13 @@ export class RelatedProcessesComponent implements OnInit {
   selectedScope = 'inbound';
   scopes = ['inbound', 'end2end']
 
+  // Avg count
+  avgCount: number = 0;
+
   constructor(
     public _dashboard: DashboardService
   ) {
+    this._dashboard.minimumAvgCountCallChain$.subscribe(count => this.avgCount = count);
     this._dashboard.selectedRelatedProcess$.subscribe(process => this.selectedRelatedProcess = process);
   }
 
@@ -97,6 +103,10 @@ export class RelatedProcessesComponent implements OnInit {
   changeProcess(process: Process) {
     console.log(process);
     this._dashboard.selectedRelatedProcess$.next(process);
+  }
+
+  changeAvgCount(count: number) {
+    this._dashboard.minimumAvgCountCallChain$.next(count);
   }
 
   filterProcess(event: AutoCompleteCompleteEvent) {

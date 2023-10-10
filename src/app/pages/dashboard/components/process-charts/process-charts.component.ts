@@ -10,6 +10,7 @@ import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocompl
 import { FormsModule } from '@angular/forms';
 import { SortChartsByRankingPipe } from '../../pipes/sort-charts-by-ranking.pipe';
 import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-process-charts',
@@ -22,7 +23,8 @@ import { RankingPercentagePipe } from '../../pipes/ranking-percentage.pipe';
     ChipModule,
     FormsModule,
     SortChartsByRankingPipe,
-    RankingPercentagePipe
+    RankingPercentagePipe,
+    InputNumberModule
   ],
   templateUrl: './process-charts.component.html'
 })
@@ -36,9 +38,14 @@ export class ProcessChartsComponent implements OnInit {
   selectedProcess: Process;
   filteredProcesses: Process[] = [];
 
+
+  // Avg count
+  avgCount: number = 0;
+
   constructor(
     public _dashboard: DashboardService
   ) {
+    this._dashboard.minimumAvgCount$.subscribe(count => this.avgCount = count);
     this._dashboard.selectedProcess$.subscribe(process => this.selectedProcess = process);
   }
 
@@ -54,6 +61,8 @@ export class ProcessChartsComponent implements OnInit {
         if (!chartData?.length) {
           return [];
         }
+
+        console.log(chartData)
 
         return chartData.map(cD => {
           if (!equalAxis) {
@@ -77,6 +86,10 @@ export class ProcessChartsComponent implements OnInit {
 
   changeProcess(process: Process) {
     this._dashboard.selectedProcess$.next(process);
+  }
+
+  changeAvgCount(count: number) {
+    this._dashboard.minimumAvgCount$.next(count);
   }
 
   filterProcess(event: AutoCompleteCompleteEvent) {
