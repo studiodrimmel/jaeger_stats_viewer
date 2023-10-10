@@ -4,7 +4,7 @@ import { ChartData, Ranking } from '../types';
 import { invoke } from '@tauri-apps/api';
 import { debug, info } from 'tauri-plugin-log-api';
 import { Process } from '../types';
-import { Table } from '../types';
+import { FileStats } from '../types';
 import { DEFAULT_SCOPE } from '../pages/dashboard/dashboard.constants';
 
 @Injectable({
@@ -12,9 +12,9 @@ import { DEFAULT_SCOPE } from '../pages/dashboard/dashboard.constants';
 })
 export class JaegerDataService {
 
-  getFileStats(): Observable<Table> {
+  getFileStats(): Observable<FileStats> {
     debug(`Calling get_file_stats()`);
-    return from(invoke<Table>('get_file_stats', {  })).pipe(
+    return from(invoke<FileStats>('get_file_stats', {  })).pipe(
       tap((tbl) => {
         info(`Returned from RUST: returns ${tbl}`);
       })

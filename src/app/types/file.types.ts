@@ -1,11 +1,7 @@
-// or shoud I reuse the chartType from chart.types.ts
-// export type ChartLine = {
-//     label: string;
-//     data: number[];
-// }
-import { ChartLine } from './chart.types';
-
-export interface Table {
+export interface FileStats {
     columnLabels: string[];
-    data: ChartLine[]
+    data: {
+        data: number[];
+        label: string;
+    }[]
 }

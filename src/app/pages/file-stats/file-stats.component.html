@@ -1,0 +1,20 @@
+<app-page-header pageName="File Stats"></app-page-header>
+
+<div class="card border-1" *ngIf="data?.data">
+    <p-table [value]="data.data" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="800px" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pFrozenColumn>Metric</th>
+                <th *ngFor="let label of data.columnLabels">{{label}}</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+            <tr>
+                <td class="border-right-1" pFrozenColumn>
+                    <b>{{ row.label }}</b>
+                </td>
+                <td *ngFor="let val of row.data">{{ val | number:'1.0-2' }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

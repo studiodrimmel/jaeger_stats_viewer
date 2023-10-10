@@ -21,8 +21,10 @@
             <p-autoComplete id="chain-filter" class="flex-grow-1" styleClass="flex-grow-1" [style]="{
                 width: '100%',
             }" [(ngModel)]="selectedRelatedProcess" [suggestions]="filteredRelatedProcesses" field="display"
+                [forceSelection]="true"
                 placeholder="Search related full call-chains..." [dropdown]="true" (onSelect)="changeProcess($event)"
-                (completeMethod)="filterProcess($event)">
+                (completeMethod)="filterProcess($event)"
+                >
                 <ng-template let-process pTemplate="item">
                     <span class="block">{{ process.display }}</span>
 

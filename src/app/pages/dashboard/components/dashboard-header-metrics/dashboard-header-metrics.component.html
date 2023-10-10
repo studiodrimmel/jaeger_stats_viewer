@@ -5,6 +5,6 @@
     </div>
     <div class="mr-5 flex align-items-center mt-3">
         <i class="pi pi-arrow-right-arrow-left mr-2"></i>
-        <span>{{numberOfRelatedProcesses}} Call-chains</span>
+        <span>{{numberOfRelatedProcesses}} Call-chains for {{(_dashboard.selectedProcess$ | async)?.display}}</span>
     </div>
 </div>

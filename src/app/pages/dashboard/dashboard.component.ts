@@ -71,7 +71,8 @@ export class DashboardComponent implements OnInit {
     this._dashboard.selectedProcess$.pipe(
       distinctUntilChanged(),
       tap(() => this._dashboard.clearRelatedProcess()),
-      switchMap((process) => this.getChartsForProcess(process))
+      filter(p => !!p),
+      switchMap((process) => this.getChartsForProcess(process as Process))
     ).subscribe({
       next: chartData => {
         this.chartsError = null;
@@ -88,7 +89,7 @@ export class DashboardComponent implements OnInit {
     ]).pipe(
       distinctUntilChanged(),
       filter(([process, ranking]) => !!process && !!ranking),
-      switchMap(([process, ranking, scope]) => this._jaeger.getCallChains(process.key, ranking.value, scope)),
+      switchMap(([process, ranking, scope]) => this._jaeger.getCallChains(process!.key, ranking.value, scope)),
     ).subscribe(relatedProcesses => {
       this.relatedProcessesses$.next(relatedProcesses);
     });
@@ -127,7 +128,8 @@ export class DashboardComponent implements OnInit {
   private getAllProcesses(ranking: Ranking) {
     this._jaeger.getProcesses(ranking.value).subscribe(processes => {
       this.processes$.next(processes);
-      this._dashboard.selectedProcess$.next(processes[0]);
+      
+      this._dashboard.selectedProcess$.next(this._dashboard.selectedProcess$.value ?? processes[0]);
     })
   }
 
