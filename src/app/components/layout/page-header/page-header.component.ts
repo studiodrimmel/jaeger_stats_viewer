@@ -12,17 +12,8 @@ import { MenuItem } from 'primeng/api';
   ],
   templateUrl: './page-header.component.html'
 })
-export class PageHeaderComponent implements OnInit {
+export class PageHeaderComponent {
   @Input() pageName: string;
-  @Input() breadcrumb: MenuItem[];
 
   home: MenuItem | undefined;
-
-  ngOnInit() {
-    this.createBreadcrumb()
-  }
-
-  private createBreadcrumb() {
-    this.home = { icon: 'pi pi-home', routerLink: '/' };
-  }
 }
