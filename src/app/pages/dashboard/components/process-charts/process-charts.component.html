@@ -13,8 +13,8 @@
         <div class="flex-grow-1 flex flex-column gap-2">
             <label htmlFor="process-filter">Select process/operation</label>
 
-            <p-autoComplete id="process-filter" class="flex-grow-1" [(ngModel)]="selectedProcess" [autoHighlight]="true"
-                [dropdown]="true" field="display" [forceSelection]="true" placeholder="Search process..." [style]="{
+            <p-autoComplete id="process-filter" class="flex-grow-1" [(ngModel)]="selectedProcess"
+                [dropdown]="true" field="display" placeholder="Search process..." [style]="{
                     width: '100%'
                 }" [suggestions]="filteredProcesses" (onSelect)="changeProcess($event)"
                 (completeMethod)="filterProcess($event)">

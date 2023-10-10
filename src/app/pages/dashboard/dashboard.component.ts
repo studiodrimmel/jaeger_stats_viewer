@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit {
   private getAllProcesses(ranking: Ranking) {
     this._jaeger.getProcesses(ranking.value).subscribe(processes => {
       this.processes$.next(processes);
-      this._dashboard.selectedProcess$.next(processes[0]);
+      // this._dashboard.selectedProcess$.next(processes[0]);
     })
   }
 

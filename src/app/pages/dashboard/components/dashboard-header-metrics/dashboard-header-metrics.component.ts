@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DashboardService } from '../../dashboard.service';
 
 @Component({
   selector: 'app-dashboard-header-metrics',
@@ -10,4 +11,6 @@ import { CommonModule } from '@angular/common';
 export class DashboardHeaderMetricsComponent {
   @Input() numberOfProcesses: number;
   @Input() numberOfRelatedProcesses: number;
+
+  constructor(public _dashboard: DashboardService) {}
 }
