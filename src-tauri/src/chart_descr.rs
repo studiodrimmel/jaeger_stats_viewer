@@ -47,12 +47,12 @@ pub fn get_call_chain_list(proc_oper: &str, metric: Option<&str>, scope: Option<
 #[derive(Serialize, Debug)]
 pub struct ChartLine {
     pub label: String,
-    pub data: Vec<f64>,
+    pub data: Vec<Option<f64>>,
 }
 
 impl ChartLine {
     pub fn new(cl: &ChartLine_opt) -> Self {
-        let data = cl.data.iter().map(|val| val.unwrap_or(0.0)).collect();
+        let data = cl.data.iter().map(|val| val.to_owned()).collect();
         Self { label: cl.label.to_owned(), data }
     }
 }
