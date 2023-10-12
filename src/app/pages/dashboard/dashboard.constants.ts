@@ -1,4 +1,4 @@
-import { Ranking } from "src/app/types";
+import { InboundOption, Ranking } from "src/app/types";
 
 export const RANKING_OPTIONS: Ranking[] = [
     { value: 'p75_millis', label: 'p75' },
@@ -16,3 +16,4 @@ export const RANKING_OPTIONS: Ranking[] = [
 export const RANKING_METRICS = RANKING_OPTIONS.map(option => option.value);
 
 export const DEFAULT_SCOPE = 'inbound';
+export const DEFAULT_INBOUND_OPTION: InboundOption = { index: '*', display: 'All' }

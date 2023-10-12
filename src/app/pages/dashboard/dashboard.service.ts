@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { ChartData, MetricChartYAxis, Process, Ranking } from '../../types';
-import { DEFAULT_SCOPE, RANKING_OPTIONS } from './dashboard.constants';
+import { ChartData, InboundOption, MetricChartYAxis, Process, Ranking } from '../../types';
+import { DEFAULT_INBOUND_OPTION, DEFAULT_SCOPE, RANKING_OPTIONS } from './dashboard.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class DashboardService {
   // Related processes (right side)
   selectedRelatedProcess$ = new BehaviorSubject<Process | null>(null);
   relatedProcessesChartData$ = new Subject<ChartData[]>();
-  scope$ = new BehaviorSubject<'inbound' | 'end2end'>(DEFAULT_SCOPE);
+  scope$ = new BehaviorSubject<'inbound' | 'end2end' | 'all'>(DEFAULT_SCOPE);
 
   // yAxis
   equalAxis$ = new BehaviorSubject(false);
@@ -26,6 +26,10 @@ export class DashboardService {
   // AvgCount filter
   minimumAvgCount$ = new BehaviorSubject<number>(0);
   minimumAvgCountCallChain$ = new BehaviorSubject<number>(0);
+
+  // Inbounds
+  inboundId$ = new BehaviorSubject<InboundOption>(DEFAULT_INBOUND_OPTION);
+  inboundOptions$ = new BehaviorSubject<InboundOption[]>([]);
 
   getChartPanelHeader(metric: string) {
     return RANKING_OPTIONS.find(opt => opt.value === metric)?.label;

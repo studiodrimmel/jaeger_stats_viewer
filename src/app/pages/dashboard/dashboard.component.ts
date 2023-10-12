@@ -10,29 +10,29 @@ import { MenuItem } from 'primeng/api';
 import { JaegerDataService } from '../../services/jaeger-data.service';
 import { FormsModule } from '@angular/forms';
 import { Process } from 'src/app/types/process.type';
-import { RANKING_METRICS, RANKING_OPTIONS } from './dashboard.constants';
+import { DEFAULT_INBOUND_OPTION, RANKING_METRICS, RANKING_OPTIONS } from './dashboard.constants';
 import { DashboardFilterbarComponent } from "./components/dashboard-filterbar/dashboard-filterbar.component";
 import { DashboardService } from './dashboard.service';
 import { Ranking } from 'src/app/types';
-import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, forkJoin, of, skip, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, forkJoin, map, of, skip, switchMap, tap } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
 
 @Component({
-    standalone: true,
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    imports: [
-        CommonModule,
-        FormsModule,
-        ButtonModule,
-        RippleModule,
-        PageHeaderComponent,
-        DashboardHeaderMetricsComponent,
-        DashboardFilterbarComponent,
-        ProcessChartsComponent,
-        RelatedProcessesComponent
-    ]
+  standalone: true,
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  imports: [
+    CommonModule,
+    FormsModule,
+    ButtonModule,
+    RippleModule,
+    PageHeaderComponent,
+    DashboardHeaderMetricsComponent,
+    DashboardFilterbarComponent,
+    ProcessChartsComponent,
+    RelatedProcessesComponent
+  ]
 })
 export class DashboardComponent implements OnInit {
   pageName = 'Process Info'
@@ -85,11 +85,16 @@ export class DashboardComponent implements OnInit {
     combineLatest([
       this._dashboard.selectedProcess$,
       this._dashboard.selectedRanking$,
-      this._dashboard.scope$
+      this._dashboard.scope$,
+      this._dashboard.inboundId$
     ]).pipe(
       distinctUntilChanged(),
       filter(([process, ranking]) => !!process && !!ranking),
-      switchMap(([process, ranking, scope]) => this._jaeger.getCallChains(process!.key, ranking.value, scope)),
+      tap(([process, ranking]) => this.setInboundCallChainOptions(process as Process, ranking)),
+      switchMap(([process, ranking, scope, inboundOption]) => {
+        const inbound = scope === 'inbound' ? DEFAULT_INBOUND_OPTION.index : inboundOption.index;
+        return this._jaeger.getCallChains(process!.key, ranking.value, scope, inbound);
+      }),
     ).subscribe(relatedProcesses => {
       this.relatedProcessesses$.next(relatedProcesses);
     });
@@ -128,7 +133,7 @@ export class DashboardComponent implements OnInit {
   private getAllProcesses(ranking: Ranking) {
     this._jaeger.getProcesses(ranking.value).subscribe(processes => {
       this.processes$.next(processes);
-      
+
       this._dashboard.selectedProcess$.next(this._dashboard.selectedProcess$.value ?? processes[0]);
     })
   }
@@ -141,6 +146,15 @@ export class DashboardComponent implements OnInit {
   private getChartsForCallChain(process: Process, scope: string) {
     const obs = RANKING_METRICS.map(metric => this._jaeger.getCallChainChartData(process.key, metric, scope));
     return forkJoin(obs);
+  }
+
+  private setInboundCallChainOptions(process: Process, ranking: Ranking) {
+    this._jaeger.getCallChains(process!.key, ranking.value)
+      .pipe(map(res => [DEFAULT_INBOUND_OPTION, ...res.map(r => ({
+        index: r.inboundIdx.toString(),
+        display: r.display
+      }))]))
+      .subscribe(res => this._dashboard.inboundOptions$.next(res));
   }
 
 }
