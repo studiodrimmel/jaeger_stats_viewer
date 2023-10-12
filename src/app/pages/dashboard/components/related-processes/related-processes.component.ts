@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Process } from 'src/app/types';
+import { InboundOption, Process } from 'src/app/types';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { DashboardService } from '../../dashboard.service';
@@ -44,16 +44,20 @@ export class RelatedProcessesComponent implements OnInit {
 
   // Scope
   selectedScope = 'inbound';
-  scopes = ['inbound', 'end2end']
+  scopes = ['inbound', 'end2end', 'all']
 
   // Avg count
   avgCount: number = 0;
+
+  // Inbound filter
+  inboundId: InboundOption;
 
   constructor(
     public _dashboard: DashboardService
   ) {
     this._dashboard.minimumAvgCountCallChain$.subscribe(count => this.avgCount = count);
     this._dashboard.selectedRelatedProcess$.subscribe(process => this.selectedRelatedProcess = process);
+    this._dashboard.inboundId$.subscribe(id => this.inboundId = id);
   }
 
   ngOnInit(): void {
@@ -98,15 +102,6 @@ export class RelatedProcessesComponent implements OnInit {
     this._dashboard.relatedProcessesChartData$.next([]);
     this._dashboard.selectedRelatedProcess$.next(null);
     this._dashboard.scope$.next(event.value);
-  }
-  
-  changeProcess(process: Process) {
-    console.log(process);
-    this._dashboard.selectedRelatedProcess$.next(process);
-  }
-
-  changeAvgCount(count: number) {
-    this._dashboard.minimumAvgCountCallChain$.next(count);
   }
 
   filterProcess(event: AutoCompleteCompleteEvent) {

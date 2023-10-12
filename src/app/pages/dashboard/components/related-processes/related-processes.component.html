@@ -7,7 +7,7 @@
         <div class="flex flex-column gap-2">
             <label htmlFor="chain-avg-count-filter">Min. count</label>
             <p-inputNumber id="chain-avg-count-filter" inputId="integeronly" [(ngModel)]="avgCount" [size]="1"
-                (onInput)="changeAvgCount(+$event.value)" />
+                (onInput)="_dashboard.minimumAvgCountCallChain$.next(+$event.value)" />
         </div>
 
         <div class="flex flex-column gap-2">
@@ -16,17 +16,33 @@
                 (onChange)="changeScope($event)"></p-dropdown>
         </div>
 
+        <div class="flex flex-column gap-2" *ngIf="selectedScope !== 'inbound'">
+            <label htmlFor="chain-inbound-filter">Inbound</label>
+            <p-dropdown id="chain-inbound-filter" [options]="(_dashboard.inboundOptions$ | async) ?? []" [(ngModel)]="inboundId"
+                optionLabel="index"
+                [panelStyle]="{maxWidth: '500px', width: '90vw'}"
+                (onChange)="_dashboard.inboundId$.next($event.value)"
+            >
+            <ng-template let-option pTemplate="item">
+                <div class="flex gap-2">
+                    <div>{{ option.index }}</div>
+                    <small class="white-space-normal">{{ option.display }}</small>
+                </div>
+            </ng-template>
+        </p-dropdown>
+        </div>
+
         <div class="flex-grow-1 flex flex-column gap-2">
             <label htmlFor="chain-filter">Select call-chain</label>
             <p-autoComplete id="chain-filter" class="flex-grow-1" styleClass="flex-grow-1" [style]="{
                 width: '100%',
             }" [(ngModel)]="selectedRelatedProcess" [suggestions]="filteredRelatedProcesses" field="display"
                 [forceSelection]="true"
-                placeholder="Search related full call-chains..." [dropdown]="true" (onSelect)="changeProcess($event)"
+                placeholder="Search related full call-chains..." [dropdown]="true" (onSelect)="_dashboard.selectedRelatedProcess$.next($event)"
                 (completeMethod)="filterProcess($event)"
                 >
                 <ng-template let-process pTemplate="item">
-                    <span class="block">{{ process.display }}</span>
+                    <small class="block white-space-normal">{{ process.display }}</small>
 
                     <div class="card flex align-items-center gap-2 flex-wrap mt-2">
                         <p-chip>

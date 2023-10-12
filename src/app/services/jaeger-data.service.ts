@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { from, map, Observable, tap } from 'rxjs';
+import { catchError, from, map, Observable, tap } from 'rxjs';
 import { ChartData, Ranking } from '../types';
 import { invoke } from '@tauri-apps/api';
 import { debug, info } from 'tauri-plugin-log-api';
 import { Process } from '../types';
 import { FileStats } from '../types';
-import { DEFAULT_SCOPE } from '../pages/dashboard/dashboard.constants';
+import { DEFAULT_INBOUND_OPTION, DEFAULT_SCOPE } from '../pages/dashboard/dashboard.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -31,18 +31,20 @@ export class JaegerDataService {
     );
   }
 
-  getCallChains(procOper: string, metric: string, scope: string = DEFAULT_SCOPE): Observable<Process[]> {
+  getCallChains(procOper: string, metric: string, scope: string = DEFAULT_SCOPE, inboundIdx = DEFAULT_INBOUND_OPTION.index): Observable<Process[]> {
     debug(`Calling get_call_chain_list(${procOper}, ${metric}, ${scope})`);
     return from(invoke<Process[]>('get_call_chain_list', {
       procOper,
       metric,
-      scope
+      scope,
+      inboundIdx
     })).pipe(
       tap((graphs) => {
         info(`Returned from RUST: process_list with: lenght ${graphs.length}`);
         debug(`   first item has chainType ${graphs[0].chainType}`);
         debug(`   first item has inboundIdx ${graphs[0].inboundIdx}`);
-      })
+      }),
+      catchError(() => [])
     );
   }
 

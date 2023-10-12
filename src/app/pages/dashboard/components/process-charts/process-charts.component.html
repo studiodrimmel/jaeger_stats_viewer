@@ -19,7 +19,7 @@
                 }" [suggestions]="filteredProcesses" (onSelect)="changeProcess($event)"
                 (completeMethod)="filterProcess($event)">
                 <ng-template let-process pTemplate="item">
-                    <span class="block">{{ process.display }}</span>
+                    <small class="block white-space-normal">{{ process.display }}</small>
                     <div class="card flex align-items-center gap-2 flex-wrap mt-2">
                         <p-chip>
                             <small class="p-1">Id {{process.idx}}</small>
