@@ -37,6 +37,7 @@ pub fn get_call_chain_list(
     proc_oper: &str,
     metric: Option<&str>,
     scope: Option<&str>,
+    inbound_idx: &str,
 ) -> Vec<ProcessListItem> {
     info!("BACKEND: get_process_list({metric:?})");
     info!(
@@ -45,10 +46,19 @@ pub fn get_call_chain_list(
     );
     let metric = metric.unwrap_or("rate (avg)");
     let scope = scope.unwrap_or("inbound");
+    let inbound_idx = if inbound_idx != "*" {
+        Some(inbound_idx.parse::<i64>().unwrap_or_else(|err| {
+            panic!("inbound_idx='{inbound_idx}' could not be parsed as integer. (Error: {err})")
+        }))
+    } else {
+        None
+    };
 
     let guard = STITCHED.lock().unwrap();
     match &*guard {
-        Some(stitched) => jaeger_stats::get_call_chain_list(&stitched, proc_oper, metric, scope),
+        Some(stitched) => {
+            jaeger_stats::get_call_chain_list(&stitched, proc_oper, metric, scope, inbound_idx)
+        }
         None => {
             error!("Not stitched data loaded");
             Vec::new()
