@@ -17,10 +17,10 @@
         </div>
 
         <div class="flex flex-column gap-2" *ngIf="selectedScope !== 'inbound'">
-            <label htmlFor="chain-inbound-filter">Inbound</label>
+            <label htmlFor="chain-inbound-filter">InboundIdx</label>
             <p-dropdown id="chain-inbound-filter" [options]="(_dashboard.inboundOptions$ | async) ?? []" [(ngModel)]="inboundId"
                 optionLabel="index"
-                [panelStyle]="{maxWidth: '500px', width: '90vw'}"
+                [panelStyle]="{maxWidth: '550px', width: '90vw'}"
                 (onChange)="_dashboard.inboundId$.next($event.value)"
             >
             <ng-template let-option pTemplate="item">

@@ -17,6 +17,7 @@ import { Ranking } from 'src/app/types';
 import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, forkJoin, map, of, skip, switchMap, tap } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
+import { debug, info } from 'tauri-plugin-log-api';
 
 @Component({
   standalone: true,
@@ -92,8 +93,9 @@ export class DashboardComponent implements OnInit {
       filter(([process, ranking]) => !!process && !!ranking),
       tap(([process, ranking]) => this.setInboundCallChainOptions(process as Process, ranking)),
       switchMap(([process, ranking, scope, inboundOption]) => {
-        const inbound = scope === 'inbound' ? DEFAULT_INBOUND_OPTION.index : inboundOption.index;
-        return this._jaeger.getCallChains(process!.key, ranking.value, scope, inbound);
+        // in case we are selection an 'inbound' process the inboundIdx filter is ignored as we want to see all processes.
+        const inboundFilter = scope === 'inbound' ? DEFAULT_INBOUND_OPTION.index : inboundOption.index;
+        return this._jaeger.getCallChains(process!.key, ranking.value, scope, inboundFilter);
       }),
     ).subscribe(relatedProcesses => {
       this.relatedProcessesses$.next(relatedProcesses);
@@ -150,8 +152,9 @@ export class DashboardComponent implements OnInit {
 
   private setInboundCallChainOptions(process: Process, ranking: Ranking) {
     this._jaeger.getCallChains(process!.key, ranking.value)
-      .pipe(map(res => [DEFAULT_INBOUND_OPTION, ...res.map(r => ({
-        index: r.inboundIdx.toString(),
+      .pipe(map(res => [DEFAULT_INBOUND_OPTION, ...res.map(r => (
+        {
+        index: r.idx.toString(),  // on the inbound record we need to take the idx, which is matched by the inboundIdx on end2end and full processes
         display: r.display
       }))]))
       .subscribe(res => this._dashboard.inboundOptions$.next(res));

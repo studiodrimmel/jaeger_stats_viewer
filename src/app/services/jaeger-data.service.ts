@@ -32,7 +32,7 @@ export class JaegerDataService {
   }
 
   getCallChains(procOper: string, metric: string, scope: string = DEFAULT_SCOPE, inboundIdx = DEFAULT_INBOUND_OPTION.index): Observable<Process[]> {
-    debug(`Calling get_call_chain_list(${procOper}, ${metric}, ${scope})`);
+    debug(`Calling get_call_chain_list(${procOper}, ${metric}, ${scope}, ${inboundIdx})`);
     return from(invoke<Process[]>('get_call_chain_list', {
       procOper,
       metric,
@@ -40,7 +40,7 @@ export class JaegerDataService {
       inboundIdx
     })).pipe(
       tap((graphs) => {
-        info(`Returned from RUST: process_list with: lenght ${graphs.length}`);
+        info(`Returned from RUST: ${graphs.length} items for get_call_chain_list(${procOper}, ${metric}, ${scope})`);
         debug(`   first item has chainType ${graphs[0].chainType}`);
         debug(`   first item has inboundIdx ${graphs[0].inboundIdx}`);
       }),
