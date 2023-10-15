@@ -28,19 +28,22 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
+    // Default-value is from the environment and otherwise a hard-coded default is taken.
     let default_input = match env::var("JEAGER_STATS_INPUT") {
         Ok(input_file) => input_file,
         Err(_err) => String::from(DEFAULT_INPUT_FILE),
     };
+    // the provided input_file is tried first, otherwise the default is loaded.
     let input_file = if !args.input_file.is_empty() {
         &args.input_file[..]
     } else {
         &default_input[..]
     };
 
-    info!("Starting the back-end server");
+    println!("Starting the backend server for the Jaeger-stats dashboard");
+    info!("Starting the back-end server for the Jaeger-stats dashboard");
     match &load_stitch_data(input_file)[..] {
-        "Ok" => {
+        "Ok" | "ok" => {
             tauri::Builder::default()
                 .plugin(tauri_plugin_log::Builder::default().build()) // allow Tauri logging
                 .invoke_handler(tauri::generate_handler![

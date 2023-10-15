@@ -9,7 +9,7 @@ pub fn get_file_stats() -> Option<Table> {
 
     let guard = STITCHED.lock().unwrap();
     match &*guard {
-        Some(stitched) => Some(jaeger_stats::get_file_stats(&stitched)),
+        Some(sd) => Some(sd.get_file_stats()),
         None => {
             error!("No stitched data loaded");
             None

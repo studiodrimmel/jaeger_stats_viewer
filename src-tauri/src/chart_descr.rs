@@ -24,7 +24,7 @@ pub fn get_process_list(metric: Option<&str>) -> Vec<ProcessListItem> {
 
     let guard = STITCHED.lock().unwrap();
     match &*guard {
-        Some(stitched) => jaeger_stats::get_process_list(&stitched, metric),
+        Some(sd) => sd.get_process_list(metric),
         None => {
             error!("Not stitched data loaded");
             Vec::new()
@@ -56,8 +56,8 @@ pub fn get_call_chain_list(
 
     let guard = STITCHED.lock().unwrap();
     match &*guard {
-        Some(stitched) => {
-            jaeger_stats::get_call_chain_list(&stitched, proc_oper, metric, scope, inbound_idx)
+        Some(sd) => {
+            sd.get_call_chain_list(proc_oper, metric, scope, inbound_idx)
         }
         None => {
             error!("Not stitched data loaded");
@@ -117,8 +117,8 @@ pub fn get_process_data(proc_oper: &str, metric: &str) -> ChartData {
     info!("#####   BACKEND: get_process_data({proc_oper}, {metric})");
     let guard = STITCHED.lock().unwrap();
     match &*guard {
-        Some(stitched) => ChartData::new(
-            jaeger_stats::get_proc_oper_chart_data(&stitched, proc_oper, metric).unwrap(),
+        Some(sd) => ChartData::new(
+            sd.get_proc_oper_chart_data(proc_oper, metric).unwrap(),
             proc_oper,
             metric,
         ),
@@ -136,8 +136,8 @@ pub fn get_call_chain_data(cc_key: &str, metric: &str) -> ChartData {
 
     let guard = STITCHED.lock().unwrap();
     match &*guard {
-        Some(stitched) => {
-            match jaeger_stats::get_call_chain_chart_data(&stitched, cc_key, metric) {
+        Some(sd) => {
+            match sd.get_call_chain_chart_data(cc_key, metric) {
                 Some(ccd) => {
                     info!("Chart data has description {:?}", ccd.description);
                     ChartData::new(ccd, cc_key, metric)
