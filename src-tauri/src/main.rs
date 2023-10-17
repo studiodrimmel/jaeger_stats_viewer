@@ -5,6 +5,7 @@ use clap::Parser;
 use log::{error, info};
 use std::env;
 //use std::{error::Error, fs, io, time::Instant};
+use std::time::{Duration, Instant};
 
 mod backend;
 mod chart_descr;
@@ -14,7 +15,7 @@ mod selection;
 use backend::load_stitch_data;
 use chart_descr::{get_call_chain_data, get_call_chain_list, get_process_data, get_process_list};
 use file_descr::get_file_stats;
-use selection::{get_selection, set_selection};
+use selection::{get_labeled_selection, set_selection};
 
 const DEFAULT_INPUT_FILE: &str = "stitched.bincode";
 
@@ -46,6 +47,15 @@ fn main() {
     info!("Starting the back-end server for the Jaeger-stats dashboard");
     match &load_stitch_data(input_file)[..] {
         "Ok" | "ok" => {
+            // TMP
+            // {
+            //     let sel = get_labeled_selection();
+            //     info!("get_labeled_selection returned {sel:?}");
+            //     let now = Instant::now();
+            //     let selected = sel.iter().map(|sl| if sl.idx < 20 {false } else {true}).collect();
+            //     set_selection(selected);
+            //     info!("set-selection elapsed: {:?}", now.elapsed());
+            // }
             tauri::Builder::default()
                 .plugin(tauri_plugin_log::Builder::default().build()) // allow Tauri logging
                 .invoke_handler(tauri::generate_handler![
@@ -55,7 +65,7 @@ fn main() {
                     get_call_chain_data,
                     get_call_chain_list,
                     get_file_stats,
-                    get_selection,
+                    get_labeled_selection,
                     set_selection,
                 ])
                 .run(tauri::generate_context!())

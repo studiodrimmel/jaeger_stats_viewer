@@ -1456,7 +1456,7 @@ checksum = "af150ab688ff2122fcef229be89cb50dd66af9e01a4ff320cc137eecc9bacc38"
 [[package]]
 name = "jaeger_stats"
 version = "0.2.2"
-source = "git+https://github.com/cvkem/jaeger_stats?branch=main#84cd28558a28e05dcee5e057309f5590a81008b8"
+source = "git+https://github.com/cvkem/jaeger_stats?branch=main#167f8a261648d63bee12db16e1764c6b071b237e"
 dependencies = [
  "bincode",
  "chrono",

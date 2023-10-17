@@ -5,14 +5,9 @@ use jaeger_stats::Selection;
 use log::error;
 
 
-// pub struct Label {
-//     pub idx: i64, // could be u64, but will be used in json, so will be signed anyway
-//     pub label: String,
-//     pub selected: bool,
-// }
 
 #[tauri::command]
-pub fn get_selection() -> Selection {
+pub fn get_labeled_selection() -> Selection {
 
     let guard = STITCHED.lock().unwrap();
     match &*guard {
@@ -28,18 +23,20 @@ pub fn get_selection() -> Selection {
 }
 
 #[tauri::command]
-pub fn set_selection(selection: Vec<bool>) {
+pub fn set_selection(selection: Vec<bool>) -> String {
 
     let mut guard = STITCHED.lock().unwrap();
     match &mut (guard.deref_mut()) {
         Some(sd) => match sd.set_selection(selection) {
-            Ok(()) => (),
+            Ok(()) => "Ok".to_owned(),
             Err(err) => {
                 error!("Setting selection failed with error: {err:?}");
+                format!("Setting selection failed with error: {err:?}")
             }
         },
         None => {
-            error!("Not stitched data loaded");
+            error!("No stitched data loaded");
+            "No stitched data loaded".to_owned()
         }
     }
 }
