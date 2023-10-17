@@ -9,10 +9,12 @@ use std::env;
 mod backend;
 mod chart_descr;
 mod file_descr;
+mod selection;
 
 use backend::load_stitch_data;
 use chart_descr::{get_call_chain_data, get_call_chain_list, get_process_data, get_process_list};
 use file_descr::get_file_stats;
+use selection::{get_selection, set_selection};
 
 const DEFAULT_INPUT_FILE: &str = "stitched.bincode";
 
@@ -29,7 +31,7 @@ fn main() {
     let args = Args::parse();
 
     // Default-value is from the environment and otherwise a hard-coded default is taken.
-    let default_input = match env::var("JEAGER_STATS_INPUT") {
+    let default_input = match env::var("JAEGER_STATS_INPUT") {
         Ok(input_file) => input_file,
         Err(_err) => String::from(DEFAULT_INPUT_FILE),
     };
@@ -52,7 +54,9 @@ fn main() {
                     get_process_data,
                     get_call_chain_data,
                     get_call_chain_list,
-                    get_file_stats
+                    get_file_stats,
+                    get_selection,
+                    set_selection,
                 ])
                 .run(tauri::generate_context!())
                 .expect("error while running tauri application");
