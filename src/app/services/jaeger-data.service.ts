@@ -5,6 +5,7 @@ import { invoke } from '@tauri-apps/api';
 import { debug, info } from 'tauri-plugin-log-api';
 import { Process } from '../types';
 import { FileStats } from '../types';
+import { Selection, LabeledSelection} from '../types';
 import { DEFAULT_INBOUND_OPTION, DEFAULT_SCOPE } from '../pages/dashboard/dashboard.constants';
 
 @Injectable({
@@ -66,6 +67,25 @@ export class JaegerDataService {
       metric 
     })).pipe(
       tap((chdata) => info(String(chdata)))
+    );
+  }
+
+  getLabeledSelection(): Observable<LabeledSelection[]> {
+    debug(`Calling get_labeled_selection()`);
+    return from(invoke<LabeledSelection[]>('get_process_list', { })).pipe(
+      tap((labeledSel) => {
+        info(`Returned from RUST: labeled_selection with: lenght ${labeledSel.length}`);
+      })
+    );
+  }
+
+
+  setSelection(): Observable<string> {
+    debug(`Calling set_selection()`);
+    return from(invoke<string>('set_selection', { })).pipe(
+      tap((result) => {
+        info(`Returned from RUST: result ${result}`);
+      })
     );
   }
 }

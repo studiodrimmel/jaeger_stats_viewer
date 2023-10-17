@@ -47,12 +47,12 @@ fn main() {
     info!("Starting the back-end server for the Jaeger-stats dashboard");
     match &load_stitch_data(input_file)[..] {
         "Ok" | "ok" => {
-            // TMP
+            // //TMP: test a selection 
             // {
             //     let sel = get_labeled_selection();
             //     info!("get_labeled_selection returned {sel:?}");
             //     let now = Instant::now();
-            //     let selected = sel.iter().map(|sl| if sl.idx < 20 {false } else {true}).collect();
+            //     let selected = sel.iter().map(|sl| sl.idx > 20 ).collect();
             //     set_selection(selected);
             //     info!("set-selection elapsed: {:?}", now.elapsed());
             // }
