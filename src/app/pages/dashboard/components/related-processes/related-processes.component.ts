@@ -77,8 +77,21 @@ export class RelatedProcessesComponent implements OnInit {
         return chartData.map(cD => {
           const processYAxis = yAxis.find(yA => yA.metric === cD.metric)
         
-          if (!processYAxis || !equalAxis) {
+          if (!processYAxis || equalAxis === 'default') {
             return cD;
+          }
+
+          if (equalAxis === 'zero') {
+            return {
+              ...cD,
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            }
           }
           
           return {

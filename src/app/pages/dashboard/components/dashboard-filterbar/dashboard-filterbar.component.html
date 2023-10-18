@@ -1,26 +1,27 @@
 <div class="card gap-4 flex">
     <div>
         <h4 class="font-medium mt-0 mb-2">Ranking</h4>
-        <p-dropdown [options]="rankingOptions" [(ngModel)]="selectedRanking" optionLabel="label" (onChange)="changeRanking($event.value)"></p-dropdown>
+        <p-dropdown [options]="rankingOptions" [(ngModel)]="selectedRanking" optionLabel="label" (onChange)="changeRanking($event.value)">
+        </p-dropdown>
     </div>
     <div>
         <h4 class="font-medium mt-0 mb-2">Equalize</h4>
         <p-dropdown [options]="stateOptions" [(ngModel)]="isEqualized" optionLabel="label" optionValue="value" (onChange)="changeEqualizer($event.value)"></p-dropdown>
     </div>
-    <div>
+    <div *ngIf="!!dateFilterLabels?.length">
         <h4 class="font-medium mt-0 mb-2">Period</h4>
         <div class="card flex gap-2">
-            <p-dropdown [options]="rankingOptions" [(ngModel)]="selectedRanking" optionLabel="label" (onChange)="changeRanking($event.value)">
+            <p-dropdown [(ngModel)]="selectedStartDate" [options]="dateFilterLabels" optionLabel="label" (onChange)="updateDateSelection()">
                 <ng-template pTemplate="selectedItem">
                     <div class="flex align-items-center gap-2">
-                        <strong>From:</strong><div>{{selectedRanking.label}}</div>
+                        <strong>From:</strong><div>{{selectedStartDate?.label}}</div>
                     </div>
                 </ng-template>
             </p-dropdown>
-            <p-dropdown [options]="rankingOptions" [(ngModel)]="selectedRanking" optionLabel="label" (onChange)="changeRanking($event.value)">
+            <p-dropdown [(ngModel)]="selectedEndDate" [options]="dateFilterLabels" optionLabel="label" (onChange)="updateDateSelection()">
                 <ng-template pTemplate="selectedItem">
                     <div class="flex align-items-center gap-2">
-                        <strong>To:</strong><div>{{selectedRanking.label}}</div>
+                        <strong>To:</strong><div>{{selectedEndDate?.label}}</div>
                     </div>
                 </ng-template>
             </p-dropdown>

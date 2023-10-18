@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, from, map, Observable, tap } from 'rxjs';
+import { catchError, from, map, Observable, of, tap } from 'rxjs';
 import { ChartData, Ranking } from '../types';
 import { invoke } from '@tauri-apps/api';
 import { debug, info } from 'tauri-plugin-log-api';
@@ -70,9 +70,10 @@ export class JaegerDataService {
     );
   }
 
-  getLabeledSelection(): Observable<LabeledSelection[]> {
+  getLabeledSelection(): Observable<LabeledSelection> {
     debug(`Calling get_labeled_selection()`);
-    return from(invoke<LabeledSelection[]>('get_process_list', { })).pipe(
+
+    return from(invoke<LabeledSelection>('get_labeled_selection', { })).pipe(
       tap((labeledSel) => {
         info(`Returned from RUST: labeled_selection with: lenght ${labeledSel.length}`);
       })
@@ -80,9 +81,9 @@ export class JaegerDataService {
   }
 
 
-  setSelection(): Observable<string> {
+  setSelection(selection: boolean[]): Observable<string> {
     debug(`Calling set_selection()`);
-    return from(invoke<string>('set_selection', { })).pipe(
+    return from(invoke<string>('set_selection', { selection })).pipe(
       tap((result) => {
         info(`Returned from RUST: result ${result}`);
       })

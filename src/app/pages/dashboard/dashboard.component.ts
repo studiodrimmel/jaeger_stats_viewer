@@ -13,11 +13,10 @@ import { Process } from 'src/app/types/process.type';
 import { DEFAULT_INBOUND_OPTION, RANKING_METRICS, RANKING_OPTIONS } from './dashboard.constants';
 import { DashboardFilterbarComponent } from "./components/dashboard-filterbar/dashboard-filterbar.component";
 import { DashboardService } from './dashboard.service';
-import { Ranking } from 'src/app/types';
-import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, forkJoin, map, of, skip, switchMap, tap } from 'rxjs';
+import { LabeledSelection, Ranking } from 'src/app/types';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, forkJoin, map, Observable, of, skip, switchMap, tap } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
-import { debug, info } from 'tauri-plugin-log-api';
 
 @Component({
   standalone: true,
@@ -53,10 +52,13 @@ export class DashboardComponent implements OnInit {
   chartsError: string | null = null;
   chartsRelatedError: string | null = null;
 
+  dateFilterLabels$: Observable<LabeledSelection>;
+
   constructor(
     public _jaeger: JaegerDataService,
     public _dashboard: DashboardService
   ) {
+    this.dateFilterLabels$ = _jaeger.getLabeledSelection();
     this.breadcrumb = [{ label: this.pageName }];
   }
 
@@ -69,11 +71,15 @@ export class DashboardComponent implements OnInit {
     });
 
     // Get charts for the main process
-    this._dashboard.selectedProcess$.pipe(
+    combineLatest([
+      this._dashboard.selectedProcess$.pipe(
+        tap(() => this._dashboard.clearRelatedProcess())
+      ),
+      this._dashboard.selectionItems$
+    ]).pipe(
       distinctUntilChanged(),
-      tap(() => this._dashboard.clearRelatedProcess()),
-      filter(p => !!p),
-      switchMap((process) => this.getChartsForProcess(process as Process))
+      filter(([p]) => !!p),
+      switchMap(([process]) => this.getChartsForProcess(process as Process))
     ).subscribe({
       next: chartData => {
         this.chartsError = null;
@@ -104,7 +110,8 @@ export class DashboardComponent implements OnInit {
     // Get charts for the related process
     combineLatest([
       this._dashboard.selectedRelatedProcess$,
-      this._dashboard.scope$
+      this._dashboard.scope$,
+      this._dashboard.selectionItems$
     ]).pipe(
       distinctUntilChanged(),
       filter(([process]) => !!process),

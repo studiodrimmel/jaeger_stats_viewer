@@ -10,3 +10,5 @@ export type DateFilterOption = {
 }
 
 export type DateFilters = DateFilterOption[];
+
+export type Equalizer = 'default' | 'equal' | 'zero'

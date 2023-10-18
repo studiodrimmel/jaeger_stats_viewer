@@ -66,7 +66,7 @@ export class ProcessChartsComponent implements OnInit {
         }
 
         return chartData.map(cD => {
-          if (!equalAxis) {
+          if (equalAxis === 'default') {
             return cD;
           }
           

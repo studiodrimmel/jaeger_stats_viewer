@@ -6,7 +6,9 @@
     ></app-dashboard-header-metrics>
 </app-page-header>
 
-<app-dashboard-filterbar></app-dashboard-filterbar>
+<app-dashboard-filterbar
+    [dateFilterLabels]="(dateFilterLabels$ | async) ?? []"
+></app-dashboard-filterbar>
 
 <div class="grid mt-0">
     <div class="col-12 md:col-6">
