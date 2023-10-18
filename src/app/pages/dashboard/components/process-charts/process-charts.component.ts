@@ -66,7 +66,7 @@ export class ProcessChartsComponent implements OnInit {
         }
 
         return chartData.map(cD => {
-          if (!equalAxis) {
+          if (equalAxis === 'default') {
             return cD;
           }
           
@@ -109,7 +109,7 @@ export class ProcessChartsComponent implements OnInit {
 
   processChartPlugin(metric: string) {
     return {
-      afterDatasetDraw: (chart: any, args: any, options: any) => {
+      afterLayout: (chart: any) => {
         const { max, min } = chart.scales.y;
         this._dashboard.updateProcessesYAxisValues({
           min, 

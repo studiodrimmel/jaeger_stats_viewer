@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { ChartData, InboundOption, MetricChartYAxis, Process, Ranking } from '../../types';
+import { ChartData, Equalizer, InboundOption, LabeledSelection, MetricChartYAxis, Process, Ranking } from '../../types';
 import { DEFAULT_INBOUND_OPTION, DEFAULT_SCOPE, RANKING_OPTIONS } from './dashboard.constants';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class DashboardService {
   scope$ = new BehaviorSubject<'inbound' | 'end2end' | 'all'>(DEFAULT_SCOPE);
 
   // yAxis
-  equalAxis$ = new BehaviorSubject(false);
+  equalAxis$ = new BehaviorSubject<Equalizer>('default');
   processesYAxisValues$ = new BehaviorSubject<MetricChartYAxis[]>([]);
 
   // AvgCount filter
@@ -30,6 +30,9 @@ export class DashboardService {
   // Inbounds
   inboundId$ = new BehaviorSubject<InboundOption>(DEFAULT_INBOUND_OPTION);
   inboundOptions$ = new BehaviorSubject<InboundOption[]>([]);
+
+  // SelectionItem
+  selectionItems$ = new BehaviorSubject<LabeledSelection>([]);
 
   getChartPanelHeader(metric: string) {
     return RANKING_OPTIONS.find(opt => opt.value === metric)?.label;
