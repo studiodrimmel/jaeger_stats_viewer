@@ -6,7 +6,7 @@
     <div class="flex gap-3">
         <div class="flex flex-column gap-2">
             <label htmlFor="chain-avg-count-filter">Min. count</label>
-            <p-inputNumber id="chain-avg-count-filter" inputId="integeronly" [(ngModel)]="avgCount" [size]="1"
+            <p-inputNumber id="chain-avg-count-filter" inputId="integeronly" [(ngModel)]="avgCount" [size]="3"
                 (onInput)="_dashboard.minimumAvgCountCallChain$.next(+$event.value)" />
         </div>
 
