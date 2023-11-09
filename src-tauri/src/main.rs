@@ -10,11 +10,13 @@ use std::time::{Duration, Instant};
 mod backend;
 mod chart_descr;
 mod file_descr;
+mod mermaid;
 mod selection;
 
 use backend::load_stitch_data;
 use chart_descr::{get_call_chain_data, get_call_chain_list, get_process_data, get_process_list};
 use file_descr::get_file_stats;
+use mermaid::get_mermaid;
 use selection::{get_labeled_selection, set_selection};
 
 const DEFAULT_INPUT_FILE: &str = "stitched.bincode";
@@ -60,6 +62,7 @@ fn main() {
                 .plugin(tauri_plugin_log::Builder::default().build()) // allow Tauri logging
                 .invoke_handler(tauri::generate_handler![
                     load_stitch_data,
+                    get_mermaid,
                     get_process_list,
                     get_process_data,
                     get_call_chain_data,
