@@ -89,4 +89,17 @@ export class JaegerDataService {
       })
     );
   }
+
+  getMermaidDiagram(procOper: string, callChainKey: string, compact: boolean): Observable<string> {
+    debug(`Calling get_mermaid(${procOper}, ${callChainKey}, ${compact})`);
+    return from(invoke<string>("get_mermaid", {
+      procOper,
+      callChainKey,
+      compact
+    })).pipe(
+      tap((diagramSpec) => info(String(diagramSpec)))
+    );
+  }
+
+
 }
