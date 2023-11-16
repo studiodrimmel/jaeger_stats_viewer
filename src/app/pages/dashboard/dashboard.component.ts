@@ -32,7 +32,13 @@ import { RelatedProcessesComponent } from "./components/related-processes/relate
     DashboardFilterbarComponent,
     ProcessChartsComponent,
     RelatedProcessesComponent
-  ]
+  ],
+  styles: [`
+    .visualize-button {
+      /* transform: rotate(-90deg) translateY(100%); */
+    }
+
+  `]
 })
 export class DashboardComponent implements OnInit {
   pageName = 'Process Info'

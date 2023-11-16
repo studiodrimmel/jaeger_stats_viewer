@@ -10,6 +10,14 @@
     [dateFilterLabels]="(dateFilterLabels$ | async) ?? []"
 ></app-dashboard-filterbar>
 
+<p-button 
+    label="Visualize" 
+    icon="pi pi-map" 
+    [outlined]="true" 
+    severity="secondary"
+    [className]="'fixed bottom-0 left-50 z-5 visualize-button'"
+></p-button>
+
 <div class="grid mt-0">
     <div class="col-12 md:col-6">
         <ng-container *ngIf="!chartsError; else chartErrorMessage">
