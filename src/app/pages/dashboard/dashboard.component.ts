@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { PageHeaderComponent } from '../../components/layout/page-header/page-header.component';
 import {
@@ -17,6 +16,7 @@ import { LabeledSelection, Ranking } from 'src/app/types';
 import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, forkJoin, map, Observable, of, skip, switchMap, tap } from 'rxjs';
 import { ProcessChartsComponent } from "./components/process-charts/process-charts.component";
 import { RelatedProcessesComponent } from "./components/related-processes/related-processes.component";
+import { VisualizationDialogComponent } from './components/visualization-dialog/visualization-dialog.component';
 
 @Component({
   standalone: true,
@@ -25,20 +25,14 @@ import { RelatedProcessesComponent } from "./components/related-processes/relate
   imports: [
     CommonModule,
     FormsModule,
-    ButtonModule,
     RippleModule,
     PageHeaderComponent,
     DashboardHeaderMetricsComponent,
     DashboardFilterbarComponent,
     ProcessChartsComponent,
-    RelatedProcessesComponent
-  ],
-  styles: [`
-    .visualize-button {
-      /* transform: rotate(-90deg) translateY(100%); */
-    }
-
-  `]
+    RelatedProcessesComponent,
+    VisualizationDialogComponent
+  ]
 })
 export class DashboardComponent implements OnInit {
   pageName = 'Process Info'
@@ -60,6 +54,8 @@ export class DashboardComponent implements OnInit {
 
   dateFilterLabels$: Observable<LabeledSelection>;
 
+  showVisualization = false;
+
   constructor(
     public _jaeger: JaegerDataService,
     public _dashboard: DashboardService
@@ -72,6 +68,7 @@ export class DashboardComponent implements OnInit {
     // Get all processes when the ranking changes
     this._dashboard.selectedRanking$.pipe(
       distinctUntilChanged(),
+      filter(ranking => !!ranking?.value)
     ).subscribe((ranking) => {
       this.getAllProcesses(ranking);
     });
@@ -102,7 +99,7 @@ export class DashboardComponent implements OnInit {
       this._dashboard.inboundId$
     ]).pipe(
       distinctUntilChanged(),
-      filter(([process, ranking]) => !!process && !!ranking),
+      filter(([process, ranking]) => !!process && !!ranking?.value),
       tap(([process, ranking]) => this.setInboundCallChainOptions(process as Process, ranking)),
       switchMap(([process, ranking, scope, inboundOption]) => {
         // in case we are selection an 'inbound' process the inboundIdx filter is ignored as we want to see all processes.
@@ -145,6 +142,10 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  public openVisualizationDialog() {
+    this.showVisualization = true;
+  }
+
   private getAllProcesses(ranking: Ranking) {
     this._jaeger.getProcesses(ranking.value).subscribe(processes => {
       this.processes$.next(processes);
@@ -164,7 +165,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private setInboundCallChainOptions(process: Process, ranking: Ranking) {
-    this._jaeger.getCallChains(process!.key, ranking.value)
+    this._jaeger.getCallChains(process!.key, ranking?.value)
       .pipe(map(res => [DEFAULT_INBOUND_OPTION, ...res.map(r => (
         {
         index: r.idx.toString(),  // on the inbound record we need to take the idx, which is matched by the inboundIdx on end2end and full processes

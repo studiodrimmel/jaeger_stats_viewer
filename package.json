@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.7",
+    "@angular/cdk": "^17.0.0",
     "@angular/common": "^16.2.7",
     "@angular/compiler": "^16.2.7",
     "@angular/core": "^16.2.7",
@@ -35,6 +36,8 @@
     "@angular/cli": "~16.2.4",
     "@angular/compiler-cli": "^16.2.7",
     "@tauri-apps/cli": "^1.4.0",
+    "@types/d3": "^7.4.3",
+    "@types/dompurify": "^3.0.5",
     "@types/jasmine": "~4.3.6",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.2",

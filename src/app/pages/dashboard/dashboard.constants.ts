@@ -17,3 +17,13 @@ export const RANKING_METRICS = RANKING_OPTIONS.map(option => option.value);
 
 export const DEFAULT_SCOPE = 'inbound';
 export const DEFAULT_INBOUND_OPTION: InboundOption = { index: '*', display: 'All' }
+
+export const MERMAID_CONFIG = {
+    startOnLoad: false,
+    flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'cardinal',
+    },
+    securityLevel: 'loose',
+}
