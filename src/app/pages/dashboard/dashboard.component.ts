@@ -54,8 +54,6 @@ export class DashboardComponent implements OnInit {
 
   dateFilterLabels$: Observable<LabeledSelection>;
 
-  showVisualization = false;
-
   constructor(
     public _jaeger: JaegerDataService,
     public _dashboard: DashboardService
@@ -140,10 +138,6 @@ export class DashboardComponent implements OnInit {
     ]).subscribe(([min, processes]) => {
       this.filteredRelatedProcesses = processes.filter(p => p.avgCount >= min)
     });
-  }
-
-  public openVisualizationDialog() {
-    this.showVisualization = true;
   }
 
   private getAllProcesses(ranking: Ranking) {
