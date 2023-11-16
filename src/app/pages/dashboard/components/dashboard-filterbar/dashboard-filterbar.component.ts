@@ -11,6 +11,7 @@ import { DashboardService } from '../../dashboard.service';
 import { Equalizer, LabeledSelection, Ranking, SelectionItem } from 'src/app/types';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { JaegerDataService } from 'src/app/services/jaeger-data.service';
+import { delay, of, take } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-filterbar',
@@ -34,8 +35,8 @@ export class DashboardFilterbarComponent implements OnChanges {
   rankingOptions = RANKING_OPTIONS;
 
   // Equalize
-  isEqualized = 'default';
-  stateOptions: {label: string, value: Equalizer}[] = [{label: 'original y-axes', value: 'default'}, {label: 'equal y-axes', value: 'equal'}, {label: 'Start at zero', value: 'zero'}];
+  equalizer = 'default';
+  equalizeOptions: {label: string, value: Equalizer}[] = [{label: 'original y-axes', value: 'default'}, {label: 'equal y-axes', value: 'equal'}, {label: 'Start at zero', value: 'zero'}];
 
   selectedStartDate: SelectionItem | undefined;
   selectedEndDate: SelectionItem | undefined;

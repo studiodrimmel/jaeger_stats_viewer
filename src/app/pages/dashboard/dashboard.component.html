@@ -10,6 +10,7 @@
     [dateFilterLabels]="(dateFilterLabels$ | async) ?? []"
 ></app-dashboard-filterbar>
 
+
 <div class="grid mt-0">
     <div class="col-12 md:col-6">
         <ng-container *ngIf="!chartsError; else chartErrorMessage">
@@ -27,3 +28,5 @@
         ></app-related-processes>
     </div>
 </div>
+
+<app-visualization-dialog />

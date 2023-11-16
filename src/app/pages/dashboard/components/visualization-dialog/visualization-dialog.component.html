@@ -1,0 +1,28 @@
+<p-button 
+    *ngIf="!!(_dashboard.selectedRelatedProcess$ | async)?.key"
+    label="Visualize flow" 
+    icon="pi pi-map" 
+    [outlined]="true" 
+    severity="secondary"
+    [className]="'fixed left-50 z-5 visualize-button bg-white'"
+    (click)="openDialog()"
+></p-button>
+
+<p-dialog 
+    header="Visualization" 
+    [(visible)]="isOpen" 
+    [modal]="true"
+    [maximizable]="true"
+    [resizable]="true"
+    [style]="{width: '99vw'}"
+>
+    <pre #mermaid class="mermaid"></pre>
+
+    <ng-template pTemplate="footer">
+        <div>
+            <p-button label="Copy" icon="pi pi-download" severity="secondary" size="small" [outlined]="true" (onClick)="copyGraphDefinition()"></p-button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast [life]="1500"></p-toast>

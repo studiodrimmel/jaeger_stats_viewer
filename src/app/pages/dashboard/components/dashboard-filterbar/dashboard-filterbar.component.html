@@ -6,7 +6,7 @@
     </div>
     <div>
         <h4 class="font-medium mt-0 mb-2">Equalize</h4>
-        <p-dropdown [options]="stateOptions" [(ngModel)]="isEqualized" optionLabel="label" optionValue="value" (onChange)="changeEqualizer($event.value)"></p-dropdown>
+        <p-dropdown [options]="equalizeOptions" [(ngModel)]="equalizer"  (onChange)="changeEqualizer($event.value)"></p-dropdown>
     </div>
     <div *ngIf="!!dateFilterLabels?.length">
         <h4 class="font-medium mt-0 mb-2">Period</h4>

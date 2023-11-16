@@ -8,7 +8,7 @@ import { Ranking } from 'src/app/types';
 export class SortChartsByRankingPipe implements PipeTransform {
 
   transform(charts: any[], ranking: Ranking) {
-    return charts?.sort((a, b) => (a.metric === ranking.value && -1) || (b.metric === ranking.value && 1) || 0);
+    return charts?.sort((a, b) => (a.metric === ranking?.value && -1) || (b.metric === ranking?.value && 1) || 0);
   }
 
 }

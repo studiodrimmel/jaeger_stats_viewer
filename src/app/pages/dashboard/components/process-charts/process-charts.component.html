@@ -16,7 +16,7 @@
             <p-autoComplete id="process-filter" class="flex-grow-1" [(ngModel)]="selectedProcess"
                 [dropdown]="true" field="display" placeholder="Search process..." [style]="{
                     width: '100%'
-                }" [suggestions]="filteredProcesses" (onSelect)="changeProcess($event)"
+                }" [suggestions]="filteredProcesses" (onSelect)="changeProcess($event.value)"
                 (completeMethod)="filterProcess($event)">
                 <ng-template let-process pTemplate="item">
                     <small class="block white-space-normal">{{ process.display }}</small>
