@@ -90,11 +90,13 @@ export class JaegerDataService {
     );
   }
 
-  getMermaidDiagram(procOper: string, callChainKey: string | null, compact: boolean): Observable<string> {
-    debug(`Calling get_mermaid(${procOper}, ${callChainKey}, ${compact})`);
+  getMermaidDiagram(procOper: string, callChainKey: string | null, /* scope: string,*/ compact: boolean): Observable<string> {
+    var scope = "full";  // TODO: Wesley drop this variable and uncomment 'scope' above please.
+    debug(`Calling get_mermaid(${procOper}, ${callChainKey}, ${scope}, ${compact})`);
     return from(invoke<string>("get_mermaid", {
       procOper,
       callChainKey,
+      scope,
       compact
     })).pipe(
       tap((diagramSpec) => info(String(diagramSpec)))
