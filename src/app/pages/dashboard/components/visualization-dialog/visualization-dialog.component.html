@@ -1,5 +1,5 @@
 <p-button 
-    *ngIf="!!(_dashboard.selectedRelatedProcess$ | async)?.key"
+    *ngIf="!!(_dashboard.selectedProcess$ | async)?.key"
     label="Visualize flow" 
     icon="pi pi-map" 
     [outlined]="true" 
@@ -14,14 +14,52 @@
     [modal]="true"
     [maximizable]="true"
     [resizable]="true"
-    [style]="{width: '99vw'}"
+    [style]="{width: '99vw', height: '100%', maxHeight: '95vh'}"
+    [contentStyle]="{height: '100%'}"
+    (onHide)="onClosingDialog()"
 >
-    <pre #mermaid class="mermaid"></pre>
+    <div #mermaid class="mermaid h-full"></div>
 
     <ng-template pTemplate="footer">
-        <div>
-            <p-button label="Copy" icon="pi pi-download" severity="secondary" size="small" [outlined]="true" (onClick)="copyGraphDefinition()"></p-button>
-        </div>
+        <div class="w-full flex justify-content-between align-items-center">
+            <div class="flex gap-3">
+                <span class="p-float-label">
+                    <p-dropdown 
+                        [options]="compactOptions" 
+                        [(ngModel)]="isCompact" 
+                        optionValue="value" 
+                        optionLabel="label" 
+                        appendTo="body"
+                        inputId="viewMode"
+                        (onChange)="fetchMermaidGraphData()"
+                    ></p-dropdown>
+                    <label for="viewMode">View mode</label>
+                </span>
+                <span class="p-float-label">
+                    <p-dropdown 
+                        [options]="scopeOptions" 
+                        [(ngModel)]="scope" 
+                        optionValue="value" 
+                        optionLabel="label" 
+                        appendTo="body"
+                        inputId="scope"
+                        (onChange)="fetchMermaidGraphData()"
+                    ></p-dropdown>
+                    <label for="scope">Scope</label>
+                </span>
+            </div>
+            <div>
+                <p-button 
+                    label="Copy" 
+                    icon="pi pi-download" 
+                    severity="secondary" 
+                    size="small" 
+                    [outlined]="true" 
+                    (onClick)="copyGraphDefinition()"
+                ></p-button>
+            </div>
+        </div> 
+     
     </ng-template>
 </p-dialog>
 
