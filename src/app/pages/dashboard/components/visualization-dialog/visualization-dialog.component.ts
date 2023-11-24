@@ -1,15 +1,19 @@
 import { CommonModule } from "@angular/common";
 import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
-import mermaid from 'mermaid';
-import { combineLatest, filter, switchMap, take } from "rxjs";
-import { JaegerDataService } from "src/app/services/jaeger-data.service";
-import { MERMAID_CONFIG } from "../../dashboard.constants";
-import { DashboardService } from "../../dashboard.service";
 import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
+import { combineLatest, filter, switchMap, take } from "rxjs";
+
+import mermaid from 'mermaid';
+
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+
+import { JaegerDataService } from "src/app/services/jaeger-data.service";
+import { MERMAID_CONFIG } from "../../dashboard.constants";
+import { DashboardService } from "../../dashboard.service";
+
 
 @Component({
     standalone: true,
@@ -35,7 +39,8 @@ export class VisualizationDialogComponent implements AfterViewInit {
 
     isOpen = false;
     graphDefinition: string;
-
+    // pzoom: typeof panzoom | undefined;
+    
     constructor(
         public readonly _dashboard: DashboardService,
         private readonly _jaeger: JaegerDataService,

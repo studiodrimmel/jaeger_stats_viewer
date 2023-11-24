@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.7",
-    "@angular/cdk": "^17.0.0",
+    "@angular/cdk": "^16.2.7",
     "@angular/common": "^16.2.7",
     "@angular/compiler": "^16.2.7",
     "@angular/core": "^16.2.7",
@@ -27,6 +27,7 @@
     "primeicons": "^6.0.1",
     "primeng": "^16.7.2",
     "rxjs": "~7.8.1",
+    "svg-pan-zoom": "^3.6.1",
     "tauri-plugin-log-api": "github:tauri-apps/tauri-plugin-log",
     "tslib": "^2.6.2",
     "zone.js": "~0.13.3"
